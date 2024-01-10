@@ -11,7 +11,7 @@ export default function LoginScreen() {
             <Text>Welcome to Login</Text>
             <Pressable
                 onPress={() => {
-                    navigation.navigate("Home");
+                    navigation.navigate("SignIn");
                 }}
 
                 style={({ pressed }) => [
@@ -21,7 +21,7 @@ export default function LoginScreen() {
                     styles.wrapperCustom,
                 ]}>
                 {({ pressed }) => (
-                    <Text style={styles.text} >{pressed ? 'Pressed!' : 'Press Me'}</Text>
+                    <Text style={styles.text} >{pressed ? 'SignIn Form!' : 'First Time User? Sign In!'}</Text>
                 )}
             </Pressable>
             <StatusBar style="auto" />

@@ -1,15 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen() {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <Text>Welcome to Login</Text>
             <Pressable
                 onPress={() => {
-                    navigation.navigate("Login");
+                    navigation.navigate("Home");
                 }}
-                
+
                 style={({ pressed }) => [
                     {
                         backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',

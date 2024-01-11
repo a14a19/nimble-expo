@@ -11,7 +11,7 @@ export default function LoginScreen() {
             <Text>Welcome to Login</Text>
             <Pressable
                 onPress={() => {
-                    navigation.navigate("SignIn");
+                    navigation.navigate("Verification");
                 }}
 
                 style={({ pressed }) => [

@@ -13,11 +13,16 @@ import {
 import React, { useState } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
 
+import { useNavigation } from "@react-navigation/native"
+
 import DateTimePicker from "@react-native-community/datetimepicker"
 import { StatusBar } from "expo-status-bar"
 import GradientButton from "../utils/GradientButton"
 
 const SignupScreen = () => {
+
+  const navigation = useNavigation();
+
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [dateOfBirth, setDateOfBirth] = useState("")
@@ -55,6 +60,7 @@ const SignupScreen = () => {
 
   const onSubmit = () => {
     console.log(fullName, email, dateOfBirth)
+    navigation.navigate("Verification")
   }
 
   return (
@@ -156,7 +162,7 @@ const SignupScreen = () => {
               <GradientButton label="Create Account" />
             </Pressable>
 
-            <Text className="text-rose-800 font-medium text-center pt-3">
+            <Text className="text-rose-800 font-medium text-center pt-3" onPress={() => navigation.navigate("SignIn")}>
               Have an Account? Sign In
             </Text>
           </View>

@@ -20,7 +20,7 @@ export default function GradientButton(props) {
 
 const styles = StyleSheet.create({
     buttonStyle: {
-        marginHorizontal: "6%",
+        marginHorizontal: "4%",
         borderRadius: "25%",
         marginTop: "28%",
     },

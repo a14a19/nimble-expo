@@ -1,5 +1,6 @@
 import { Text, View, TextInput, SafeAreaView, Pressable } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+// import RNPickerSelect from 'react-native-picker-select';
+import { SelectList } from 'react-native-dropdown-select-list';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'react-native-web';
 import { useState } from 'react';
@@ -52,22 +53,20 @@ export default function VerificationScreen() {
             <View className="flex justify-items-start bg-white text-black h-screen pt-[8%]">
                 <Text className="flex text-left font-bold text-2xl pl-[4%] pb-[6%]">Enter your Number</Text>
                 <Text className="flex text-left px-[4%] pb-[14%]">We will need to verify your identify to ensure the safety of our users</Text>
-                <View className="flex flex-row justify-start px-[4%] pb-[2%]">
-                    <View className="flex flex-row justify-between">
-                        <View className="flex flex-row justify-center w-[28%] px-4 py-4 bg-neutral-100 rounded-lg border border-slate-300 text-black text-center">
-                            <RNPickerSelect
-                                placeholder={placeholder}
-                                items={options}
-                                onValueChange={changeCountryCode}
-                                value={countryCode}
-                            />
-                            <View className="flex px-[6%] justify-around" />
-                            <AntDesign name="down" size={20} color="black" />
-                        </View>
-                        <TextInput className="w-[68%] h-[100%] px-4 bg-neutral-100 rounded-lg border border-slate-300" onChangeText={changePhoneNumber} value={phoneNumber} placeholder="Phone number" keyboardType="numeric" />
+                <View className="flex flex-row justify-start px-[4%] pb-[2%] w-[100%]">
+                    <View className="flex flex-row justify-between w-[100%]">
+                        <SelectList 
+                            boxStyles={{ borderRadius: "8%", border: "0.4px solid var(--gray, #BBBBD1)", background: "#F6F6F6" }}
+                            placeholder={"CC"}
+                            search={false}
+                            setSelected={changeCountryCode} 
+                            data={[...options.map(item => item.label)]}
+                            save="value"
+                        />
+                        <TextInput className="w-[68%] h-[46px] px-4 bg-[white] rounded-lg border-[0.8px] border-[black]" onChangeText={changePhoneNumber} value={phoneNumber} placeholder="Phone number" keyboardType="numeric" />
                     </View>
                 </View>
-                {hasError && <Text className="flex text-left px-[6%] text-red-700">Please enter all the fields!</Text>}
+                {hasError && <Text className="flex text-left px-[4%] text-red-700">Please enter all the fields!</Text>}
                 <GradientButton onPress={checkErrors} label="Verify" />
                 <StatusBar style="auto" />
             </View>

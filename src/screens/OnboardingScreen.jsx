@@ -8,7 +8,7 @@ function OnboardingScreen() {
     return (
         <SafeAreaView>
             <View className="flex justify-items-start bg-white text-black h-screen pt-[8%]">
-                <View className="flex flex-row justify-center mt-[50%]">
+                <View className="flex flex-row justify-center mt-[5%]">
                     <Image className="h-[72%] w-[9%]"
                         source={require('../assets/Vector.png')}
                     />
@@ -16,7 +16,7 @@ function OnboardingScreen() {
                 </View>
                 <Text className="flex text-center font-semibold text-xl pl-[4%] pb-[10%]">Date first, text after</Text>
                 <Text
-                    className=" flex text-center mt-[55%] px-[18%]  text-md text-black">
+                    className=" flex text-center mt-[30%] px-[18%]  text-md text-black">
                     By Creating an account you agree to Our
                     <Text className=" flex text-center mt-4  text-[#F21464]"> Terms of Service </Text>
                     and
@@ -26,7 +26,7 @@ function OnboardingScreen() {
                 <View className="mt-2">
                     <GradientButton
                         onPress={() => {
-                            // navigation.navigate("CreateAccountScreen");
+                            navigation.navigate("SignUp");
                         }}
                         label="Create Account"
                     />

@@ -15,11 +15,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
+        <Stack.Screen name="Home" component={OnboardingScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -45,7 +46,7 @@ export default function App() {
           component={VerifyNumber}
           options={{ headerShown: false }}
         />
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
   )

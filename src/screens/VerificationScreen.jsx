@@ -33,7 +33,7 @@ export default function VerificationScreen() {
         }
         else {
             setHasError(false);
-            navigation.navigate("Home");
+            navigation.navigate("VerifyNumber");
         }
     }
 

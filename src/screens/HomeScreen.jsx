@@ -1,4 +1,4 @@
-import { Text, View, Pressable, SafeAreaView } from 'react-native';
+import { Text, View, Pressable, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'react-native-web';
 
@@ -12,10 +12,10 @@ export default function HomeScreen() {
                 <Text>Open up Nimble.js to start working on your app!</Text>
                 <Pressable
                     onPress={() => {
-                        navigation.navigate("Login");
+                        navigation.navigate("SignIn");
                     }}
 
-                    className="bg-blue-500 text-black"
+                    className="bg-gradient-to-r from-pink-400 to-fuchsia-400 text-black"
                 >
                     {({ pressed }) => (
                         <Text >{pressed ? 'Pressed!' : 'Press Me'}</Text>

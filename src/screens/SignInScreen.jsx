@@ -11,15 +11,42 @@ import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
 
 function SignInScreen() {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [hasNameError, setNameError] = useState(false);
+  const [hasEmailError, setEmailError] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [nameErrorMessage, setNameErrorMessage] = useState("")
+
 
   const handleEmail = (value) => {
-    setEmail(value)
+      setEmail(value);
+      setEmailError(false);
   }
   const handleName = (value) => {
-    setName(value)
+      setName(value);
+      setNameError(false);
+  }
+
+  const checkErrors = () => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (name.length === 0) {
+          setNameError(true);
+          setNameErrorMessage("Invalid Username!");
+          return;
+      }
+
+      else if (!emailRegex.test(email)) {
+          setEmailError(true);
+          setEmailErrorMessage("Please enter a valid email address.");
+          return;
+      }
+      else {
+
+          navigation.navigate("Verification");
+      }
+
   }
 
   return (
@@ -51,9 +78,7 @@ function SignInScreen() {
 
         <View className=" mt-16">
           <GradientButton
-            onPress={() => {
-              navigation.navigate("Verification")
-            }}
+            onPress={checkErrors}
             label="Sign In"
           />
         </View>
@@ -62,7 +87,7 @@ function SignInScreen() {
           <Text className=" text-[#F21464]">Don't have and Account? </Text>
           <Pressable
             onPress={() => {
-              navigation.navigate("SignUp")
+              navigation.navigate("Verification")
             }}
           >
             <Text className=" text-[#F21464] underline">Sign Up</Text>

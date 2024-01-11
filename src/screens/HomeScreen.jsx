@@ -15,7 +15,7 @@ export default function HomeScreen() {
                         navigation.navigate("Onboarding");
                     }}
 
-                    className="bg-gradient-to-r from-pink-400 to-fuchsia-400 text-black"
+                    className=" text-black"
                 >
                     {({ pressed }) => (
                         <Text >{pressed ? 'Pressed!' : 'Press Me'}</Text>

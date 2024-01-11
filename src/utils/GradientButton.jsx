@@ -21,8 +21,8 @@ export default function GradientButton(props) {
 const styles = StyleSheet.create({
     buttonStyle: {
         marginHorizontal: "6%",
-        borderRadius: "25%",
-        marginTop: "5%",
+        borderRadius: 50,
+        marginTop: "28%",
     },
     textStyle: {
         color: 'white',

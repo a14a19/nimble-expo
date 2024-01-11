@@ -5,6 +5,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import VerificationScreen from './src/screens/VerificationScreen';
 import VerifyNumber from './src/screens/VerifyNumber';
+import OnboardingScreen from './src/screens/OnboardingScreen';
 
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
         <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Verification" component={VerificationScreen} options={{ headerShown: false }} />
         <Stack.Screen name="VerifyNumber" component={VerifyNumber} options={{ headerShown: false }} />
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

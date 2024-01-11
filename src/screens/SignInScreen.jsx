@@ -50,17 +50,16 @@ function SignInScreen() {
                     }} label="Sign In" />
                 </View>
 
-                <View className=" ">
+                <View className="flex flex-row justify-center items-center mt-4 text-center  text-sm">
+                    <Text className=" text-[#F21464]">Don't have and Account? </Text>
                     <Pressable
                         onPress={() => {
                             navigation.navigate("Verification");
                         }}
-
-
                     >
-                        {({ pressed }) => (
-                            <Text className=" flex text-center mt-4  text-sm text-[#F21464]">{pressed ? 'Pressed!' : 'Dont have and Account? Sign Up!'}</Text>
-                        )}
+                        <Text className=" text-[#F21464] underline">
+                            Sign Up
+                        </Text>
                     </Pressable>
                 </View>
 

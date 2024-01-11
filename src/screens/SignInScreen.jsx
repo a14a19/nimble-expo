@@ -1,88 +1,96 @@
-import { Pressable, StyleSheet, Text, View, TextInput, Button } from 'react-native';
-
+import { StyleSheet, Text, View, TextInput, Pressable, SafeAreaView } from 'react-native';
+import GradientButton from '../utils/GradientButton';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 
 
 function SignInScreen() {
+    const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+
+
+    const handleEmail = (value) => {
+        setEmail(value);
+    }
+    const handleName = (value) => {
+        setName(value);
+    }
+
+
 
     return (
-        <View className='mt-12  bg-transparent' >
-            <Text className='mt-24 mx-2 text-xl font-extrabold  mb-6 ' >Sign In</Text>
+        <SafeAreaView>
+            <View className="flex justify-items-start bg-white text-black h-screen pt-[8%]">
+                <Text className="flex text-left font-bold text-2xl pl-[4%] pb-[6%]">Sign In</Text>
 
-            <Text className="mx-2 text-lg font-semibold">Enter your Full Name</Text>
+                <Text className="px-[4%] text-lg font-semibold">Enter your Full Name</Text>
 
-            <TextInput
-                className="border focus:border-green-400 border-slate-300 bg-grey-500 h-9 rounded-lg w-auto mx-2"
-                placeholder=""
-            />
-            <Text className="mx-2 text-lg font-semibold">Enter Your Email Address</Text>
+                <TextInput
+                    className="border focus:border-green-400 border-slate-300 bg-neutral-100 h-[6%] rounded-lg w-auto mx-[4%]"
+                    placeholder=""
+                    onChangeText={handleName}
+                />
+                <Text className="px-[4%] mt-[3%] text-lg font-semibold ">Enter Your Email Address</Text>
 
-            <TextInput
-                className="border border-slate-300 bg-grey-500 h-9 rounded-lg w-auto mx-2"
-                type='email'
-                placeholder=""
-            />
-            <View className="flex justify-end mt-8">
-                <Button
-                    style={styles.forgot}
+                <TextInput
+                    className="border border-slate-300 bg-neutral-100 h-[6%] rounded-lg w-auto mx-[4%]"
+                    type='email'
+                    placeholder=""
+                    onChangeText={handleEmail}
 
-                    title="Forgot Password?"
-
-                    onPress={() => {
-                        // Forgot pasword Logic logic here
-                    }}
                 />
 
 
+
+                <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] font-semibold">Forgot Password?</Text>
+
+
+
+
+                <View className=" mt-16">
+                    <GradientButton onPress={() => {
+                        navigation.navigate("Verification");
+                    }} label="Sign In" />
+
+
+                </View>
+
+
+
+                <View className=" ">
+                    <Pressable
+                        onPress={() => {
+                            navigation.navigate("Verification");
+                        }}
+
+
+                    >
+                        {({ pressed }) => (
+                            <Text className=" flex text-center mt-4  text-sm text-[#F21464] font-semibold">{pressed ? 'Pressed!' : 'Dont have and Account? Sign Up!'}</Text>
+                        )}
+                    </Pressable>
+                </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
             </View>
-            <View className=" mt-16">
-                <Button
-                    // className="border rounded-xl bg-slate-500 text-black"
-                    // style={styles.signIn} 
 
-                    title="Sign Up"
-                    onPress={() => {
-                        // sign-up logic here
-                    }}
-                />
+        </SafeAreaView>
 
-            </View>
-
-
-
-
-            <Button
-                className="border rounded-xl bg-slate-500 text-black"
-                title="Dont have and Account? Sign Up here"
-                onPress={() => {
-                    // sign-up logic here
-                }}
-            />
-
-
-
-
-
-
-        </View>
     )
 
 }
 export default SignInScreen;
 
-
-const styles = StyleSheet.create({
-
-
-    forgot: {
-        alignSelf: 'flex-start',
-        // borderColor: 'gray',
-        // borderWidth: 1,
-        // marginBottom: 10,
-        // padding: 10,
-        // width: '80%',
-    },
-    signIn: {
-
-    }
-});

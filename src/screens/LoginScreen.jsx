@@ -1,45 +1,63 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { StatusBar } from 'react-native-web';
-import { useNavigation } from '@react-navigation/native';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "react-native-web";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
 
-    const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <Text>Welcome to Login</Text>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Verification");
+        }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
+          },
+          styles.wrapperCustom,
+        ]}
+      >
+        {({ pressed }) => (
+          <Text style={styles.text}>{pressed ? "Pressed!" : "Press Me"}</Text>
+        )}
+      </Pressable>
 
-    return (
-        <View style={styles.container}>
-            <Text>Welcome to Login</Text>
-            <Pressable
-                onPress={() => {
-                    navigation.navigate("Verification");
-                }}
+      <StatusBar style="auto" />
+      <Text>Passions Screen</Text>
 
-                style={({ pressed }) => [
-                    {
-                        backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
-                    },
-                    styles.wrapperCustom,
-                ]}>
-                {({ pressed }) => (
-                    <Text style={styles.text} >{pressed ? 'Pressed!' : 'Press Me'}</Text>
-                )}
-            </Pressable>
-            <StatusBar style="auto" />
-        </View>
-    )
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Passions");
+        }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
+          },
+          styles.wrapperCustom,
+        ]}
+      >
+        {({ pressed }) => (
+          <Text style={styles.text}>{pressed ? "Pressed!" : "Press Me"}</Text>
+        )}
+      </Pressable>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    wrapperCustom: {
-        backgroundColor: "#000",
-    },
-    text: {
-        color: "#fff"
-    }
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  wrapperCustom: {
+    backgroundColor: "#000",
+  },
+  text: {
+    color: "#fff",
+  },
 });

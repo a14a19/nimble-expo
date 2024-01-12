@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     buttonStyle: {
         marginHorizontal: "6%",
         borderRadius: 50,
-       
     },
     textStyle: {
         color: 'white',

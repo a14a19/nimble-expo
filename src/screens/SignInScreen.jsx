@@ -1,9 +1,14 @@
-import { StyleSheet, Text, View, TextInput, Pressable, SafeAreaView } from 'react-native';
-import GradientButton from '../utils/GradientButton';
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
-
-
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Pressable,
+  SafeAreaView,
+} from "react-native"
+import GradientButton from "../utils/GradientButton"
+import { useNavigation } from "@react-navigation/native"
+import { useState } from "react"
 
 function SignInScreen() {
     const navigation = useNavigation();
@@ -86,9 +91,7 @@ function SignInScreen() {
 
 
                     >
-                        {({ pressed }) => (
-                            <Text className=" flex text-center mt-4  text-sm text-[#F21464]">{pressed ? 'Welcome!!!' : 'Dont have and Account? Sign Up!'}</Text>
-                        )}
+                            <Text className=" flex text-center mt-4  text-sm text-[#F21464]">Dont have and Account? Sign Up!</Text>
                     </Pressable>
                 </View>
 
@@ -97,7 +100,5 @@ function SignInScreen() {
         </SafeAreaView>
 
     )
-
 }
-export default SignInScreen;
-
+export default SignInScreen

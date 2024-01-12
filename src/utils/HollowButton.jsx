@@ -26,7 +26,6 @@ export default function HollowButton({onPress,label,mTop}) {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginHorizontal: '6%',
-    
   },
   textStyle: {
     color: '#FF74A6',

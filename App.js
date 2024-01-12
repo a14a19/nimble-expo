@@ -4,51 +4,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./src/screens/LoginScreen";
 import VerificationScreen from "./src/screens/VerificationScreen";
 import PassionsScreen from "./src/screens/PassionsScreen";
-import { useState, useEffect } from "react";
-
-import * as Font from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useCallback } from "react";
-import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  // Initialize state for app readiness
-  const [appIsReady, setAppIsReady] = useState(false);
-
-  // Show splash screen while we load Google Fonts
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        await Font.loadAsync({
-          Montserrat_400Regular: Montserrat_400Regular,
-        });
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  // Create a callback for when our font is done loading
-  const handleOnLayout = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  // return null until app is ready
-  if (!appIsReady) {
-    return null;
-  }
-
   return (
-    <NavigationContainer onLayout={handleOnLayout}>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"

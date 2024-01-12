@@ -12,7 +12,7 @@ export default function HomeScreen() {
                 <Text>Open up Nimble.js to start working on your app!</Text>
                 <Pressable
                     onPress={() => {
-                        navigation.navigate("SignIn");
+                        navigation.navigate("Onboarding");
                     }}
 
                     className=" text-black"

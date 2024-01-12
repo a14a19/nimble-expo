@@ -6,6 +6,7 @@ import SignInScreen from "./src/screens/SignInScreen"
 import VerificationScreen from "./src/screens/VerificationScreen"
 import VerifyNumber from "./src/screens/VerifyNumber"
 import SignupScreen from "./src/screens/SignupScreen"
+import OnboardingScreen from './src/screens/OnboardingScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -13,11 +14,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
+        <Stack.Screen name="Home" component={OnboardingScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="Login"
           component={LoginScreen}

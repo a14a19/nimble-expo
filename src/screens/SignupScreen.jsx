@@ -58,6 +58,7 @@ const SignupScreen = () => {
 
   const onSubmit = () => {
     console.log(fullName, email, dateOfBirth)
+    navigation.navigate("Verification")
   }
 
   return (
@@ -104,12 +105,15 @@ const SignupScreen = () => {
                   //   height: 120,
                   //   marginTop: -10,
                   // }}
+
                   maximumDate={new Date()}
                   minimumDate={new Date("1990-1-1")}
                 />
               )}
 
+
               {/* {showDatePicker && Platform.OS === "android" && (
+
                 <View className="flex justify-around flex-row">
                   <TouchableOpacity
                     onPress={toggleDatePicker}

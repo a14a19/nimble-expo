@@ -13,15 +13,13 @@ import {
 import React, { useState } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-import { useNavigation } from "@react-navigation/native"
-
 import DateTimePicker from "@react-native-community/datetimepicker"
 import { StatusBar } from "expo-status-bar"
 import GradientButton from "../utils/GradientButton"
+import { useNavigation } from "@react-navigation/native"
 
 const SignupScreen = () => {
-
-  const navigation = useNavigation();
+  const navigate = useNavigation()
 
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
@@ -103,16 +101,19 @@ const SignupScreen = () => {
                   display="spinner"
                   value={date}
                   onChange={onChange}
-                  style={{
-                    height: 120,
-                    marginTop: -10,
-                  }}
+                  // style={{
+                  //   height: 120,
+                  //   marginTop: -10,
+                  // }}
+
                   maximumDate={new Date()}
                   minimumDate={new Date("1990-1-1")}
                 />
               )}
 
-              {showDatePicker && Platform.OS === "ios" && (
+
+              {/* {showDatePicker && Platform.OS === "android" && (
+
                 <View className="flex justify-around flex-row">
                   <TouchableOpacity
                     onPress={toggleDatePicker}
@@ -131,7 +132,7 @@ const SignupScreen = () => {
                     </Text>
                   </TouchableOpacity>
                 </View>
-              )}
+              )} */}
 
               {!showDatePicker && (
                 <Pressable onPress={toggleDatePicker}>
@@ -162,7 +163,10 @@ const SignupScreen = () => {
               <GradientButton label="Create Account" />
             </Pressable>
 
-            <Text className="text-rose-800 font-medium text-center pt-3" onPress={() => navigation.navigate("SignIn")}>
+            <Text
+              onPress={() => navigate.navigate("SignIn")}
+              className="text-rose-800 font-medium text-center pt-3"
+            >
               Have an Account? Sign In
             </Text>
           </View>

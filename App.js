@@ -7,6 +7,7 @@ import VerificationScreen from "./src/screens/VerificationScreen"
 import VerifyNumber from "./src/screens/VerifyNumber"
 import SignupScreen from "./src/screens/SignupScreen"
 import OnboardingScreen from './src/screens/OnboardingScreen';
+import PassionsScreen from "./src/screens/PassionsScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -43,6 +44,11 @@ export default function App() {
         <Stack.Screen
           name="VerifyNumber"
           component={VerifyNumber}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Passions"
+          component={PassionsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

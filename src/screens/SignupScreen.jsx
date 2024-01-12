@@ -128,8 +128,8 @@ const SignupScreen = () => {
                         // navigation.navigate("SignIn");
                       }}
                       label="Cancel"
-                      mTop={`0`}
-                      pVertical={`0`}
+                      mTop={`0%`}
+                      pVertical={`0%`}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -139,13 +139,13 @@ const SignupScreen = () => {
                     {/* <Text className="text-fuchsia-700 font-medium text-sm text-center">
                       Confirm
                     </Text> */}
-                    <GradientButton pVertical={`0`}
-                    pVerticalBtn={`2%`}
+                    <GradientButton pVertical={`0%`}
+                      pVerticalBtn={`2%`}
                       onPress={() => {
                         // navigation.navigate("SignUp");
                       }}
                       label="Confirm"
-                      mTop={`0`}
+                      mTop={`0%`}
                     />
                   </TouchableOpacity>
                 </View>
@@ -177,7 +177,7 @@ const SignupScreen = () => {
             </View>
 
             <Pressable onPress={onSubmit}>
-              <GradientButton pVertical={`4%`} label="Create Account" />
+              <GradientButton pVertical={`4%`} label="Create Account" pVerticalBtn={`2%`} mTop={`0%`} />
             </Pressable>
 
             <Text

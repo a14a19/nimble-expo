@@ -46,7 +46,7 @@ export default function VerificationScreen() {
         { label: "IN +91", value: '+91' },
         { label: "US +1", value: '+1' },
         { label: "CA +7", value: '+7' },
-        { label: "UAE +231", value: '231'},
+        { label: "UAE +231", value: '231' },
     ];
 
     const openDrawer = () => {
@@ -80,7 +80,7 @@ export default function VerificationScreen() {
                     </View>
                 </View>
                 {hasError && <Text className="flex text-left px-[6%] text-red-700">Please enter all the fields!</Text>}
-                <GradientButton pVertical={`0`} onPress={checkErrors} label="Verify" />
+                <GradientButton pVertical={`0%`} onPress={checkErrors} label="Verify" pVerticalBtn={`4%`} mTop={`20%`} />
                 <StatusBar style="auto" />
             </View>
         </SafeAreaView>

@@ -5,9 +5,10 @@ import HollowButton from '../utils/HollowButton';
 
 function OnboardingScreen() {
     const navigation = useNavigation();
+    const marginTopValue = "3%";
     return (
         <SafeAreaView>
-            <View className="flex justify-items-start bg-white text-black h-screen pt-[8%]">
+            <View className="flex flex-col justify-items-start bg-white text-black h-screen pt-[8%]">
                 <View className="flex flex-row justify-center mt-[50%]">
                     <Image className=""
                         source={require('../assets/Vector.png')}
@@ -29,6 +30,7 @@ function OnboardingScreen() {
                             // navigation.navigate("CreateAccountScreen");
                         }}
                         label="Create Account"
+                        mTop={marginTopValue}
                     />
                 </View>
                 <View className="flex justify-around mt-0 mb-2">
@@ -37,6 +39,7 @@ function OnboardingScreen() {
                             navigation.navigate("SignIn");
                         }}
                         label="Sign In"
+                        mTop={marginTopValue}
                     />
                 </View>
             </View>

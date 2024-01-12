@@ -5,9 +5,6 @@ import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
-import EmojiSelector, { Categories } from "react-native-emoji-selector";
-
-import spaghetti from "../../assets/icons/spaghetti.png";
 
 import {
   Text,

@@ -77,7 +77,7 @@ function SignInScreen() {
                 <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
 
                 <View className=" mt-16">
-                    <GradientButton
+                    <GradientButton pVertical={`0`}
                         onPress={checkErrors}
                         label="Sign In"
                     />

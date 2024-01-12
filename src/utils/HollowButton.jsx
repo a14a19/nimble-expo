@@ -2,12 +2,12 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function HollowButton({onPress,label,mTop}) {
+export default function HollowButton({ onPress, label, mTop, pVertical }) {
   return (
     <View>
       <LinearGradient
         onTouchStart={onPress}
-        style={[styles.buttonStyle,{ marginTop: mTop }]}
+        style={[styles.buttonStyle, { marginTop: mTop }]}
         start={[0, 0]}
         end={[1, 1]}
         location={[0.5, 0.5]}
@@ -17,7 +17,7 @@ export default function HollowButton({onPress,label,mTop}) {
         borderWidth={2}
         borderRadius={50}
       >
-        <Text style={styles.textStyle}>{label}</Text>
+        <Text style={[styles.textStyle, { paddingVertical: pVertical }]}>{label}</Text>
       </LinearGradient>
     </View>
   );
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#FF74A6',
     fontWeight: 'bold',
-    paddingVertical: '4%',
     textAlign: 'center',
   },
 });

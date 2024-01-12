@@ -17,6 +17,7 @@ import DateTimePicker from "@react-native-community/datetimepicker"
 import { StatusBar } from "expo-status-bar"
 import GradientButton from "../utils/GradientButton"
 import { useNavigation } from "@react-navigation/native"
+import HollowButton from "../utils/HollowButton"
 
 const SignupScreen = () => {
   const navigate = useNavigation()
@@ -101,10 +102,10 @@ const SignupScreen = () => {
                   display="spinner"
                   value={date}
                   onChange={onChange}
-                  // style={{
-                  //   height: 120,
-                  //   marginTop: -10,
-                  // }}
+                  style={{
+                    height: 120,
+                    marginTop: -10,
+                  }}
 
                   maximumDate={new Date()}
                   minimumDate={new Date("1990-1-1")}
@@ -112,27 +113,43 @@ const SignupScreen = () => {
               )}
 
 
-              {/* {showDatePicker && Platform.OS === "android" && (
+              {showDatePicker && Platform.OS === "ios" && (
 
                 <View className="flex justify-around flex-row">
                   <TouchableOpacity
                     onPress={toggleDatePicker}
-                    className="p-2 bg-gray-400"
+                    className="p-2"
                   >
-                    <Text className="text-gray-700 font-medium text-sm text-center">
+                    {/* <Text className="text-gray-700 font-medium text-sm text-center">
                       Cancel
-                    </Text>
+                    </Text> */}
+                    <HollowButton
+                      onPress={() => {
+                        // navigation.navigate("SignIn");
+                      }}
+                      label="Cancel"
+                      mTop={`0`}
+                      pVertical={`0`}
+                    />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={confirmIOSDate}
-                    className="p-2 bg-gray-400"
+                    className="p-2"
                   >
-                    <Text className="text-fuchsia-700 font-medium text-sm text-center">
+                    {/* <Text className="text-fuchsia-700 font-medium text-sm text-center">
                       Confirm
-                    </Text>
+                    </Text> */}
+                    <GradientButton pVertical={`0`}
+                    pVerticalBtn={`2%`}
+                      onPress={() => {
+                        // navigation.navigate("SignUp");
+                      }}
+                      label="Confirm"
+                      mTop={`0`}
+                    />
                   </TouchableOpacity>
                 </View>
-              )} */}
+              )}
 
               {!showDatePicker && (
                 <Pressable onPress={toggleDatePicker}>
@@ -160,7 +177,7 @@ const SignupScreen = () => {
             </View>
 
             <Pressable onPress={onSubmit}>
-              <GradientButton label="Create Account" />
+              <GradientButton pVertical={`4%`} label="Create Account" />
             </Pressable>
 
             <Text

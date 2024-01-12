@@ -25,9 +25,9 @@ function OnboardingScreen() {
                     .
                 </Text>
                 <View className="flex justify-around mt-4">
-                    <GradientButton
+                    <GradientButton pVertical={`0`}
                         onPress={() => {
-                            // navigation.navigate("CreateAccountScreen");
+                            navigation.navigate("SignUp");
                         }}
                         label="Create Account"
                         mTop={marginTopValue}
@@ -40,6 +40,7 @@ function OnboardingScreen() {
                         }}
                         label="Sign In"
                         mTop={marginTopValue}
+                        pVertical={`4%`}
                     />
                 </View>
             </View>

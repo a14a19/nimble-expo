@@ -24,7 +24,7 @@ function VerifyNumber() {
                 <Text className="flex text-left font-bold text-2xl pl-[4%] pb-[6%] mt-5">Enter your Number</Text>
                 <Text className="flex text-left px-[4%] pb-[14%]">Enter the 4 digits code we’ve texted to +1234567890</Text>
 
-                <GradientButton onPress={() => handlePress()} label={`Continue`} />
+                <GradientButton pVertical={`0`} onPress={() => handlePress()} label={`Continue`} />
                 <CountdownTimer startDuration={60} handleClick={handleResend} />
                 <StatusBar style="auto" />
             </View>

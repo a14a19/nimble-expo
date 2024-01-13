@@ -130,7 +130,7 @@ const PassionsComponent = () => {
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-300 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
                   }`}
                 >
@@ -161,7 +161,7 @@ const PassionsComponent = () => {
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-300 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
                   }`}
                 >
@@ -192,7 +192,7 @@ const PassionsComponent = () => {
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-300 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[111px]" : "w-[111px]"
                   }`}
                 >
@@ -225,7 +225,7 @@ const PassionsComponent = () => {
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-300 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[102px]"
                   }`}
                 >
@@ -256,7 +256,7 @@ const PassionsComponent = () => {
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-300 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
                   }`}
                 >

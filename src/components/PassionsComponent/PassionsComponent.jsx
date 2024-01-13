@@ -7,13 +7,13 @@ import { useForm } from "react-hook-form";
 //Custom Hooks
 import useEmoji from "../../hooks/useEmoji";
 import useFormattedInterest from "../../hooks/useFormattedInterests";
-import useInterests from "../../hooks/useInterests";
+import useDefaultValues from "../../hooks/useDefaultValues";
 
 const PassionsComponent = () => {
   const navigateTo = useNavigation();
-  const interests = useInterests();
+  const defaultValues = useDefaultValues();
   const { control, handleSubmit, setValue, watch } = useForm({
-    defaultValues: interests,
+    defaultValues: defaultValues,
   });
 
   const selectedInterests = watch(); //IMPORTANT!! - Watches for changes in form state

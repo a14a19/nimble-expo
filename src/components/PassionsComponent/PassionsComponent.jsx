@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useForm } from "react-hook-form";
 
 //Custom Hooks
-import useEmoji from "../../hooks/useEmoji"; // Adjust the path
+import useEmoji from "../../hooks/useEmoji";
 import useFormattedInterest from "../../hooks/useFormattedInterests";
 import useInterests from "../../hooks/useInterests";
 
@@ -23,7 +23,7 @@ const PassionsComponent = () => {
 
   const displayInterests = Object.keys(control._defaultValues); //display interests!
   const isLongText = (formattedText) => {
-    return formattedText.length > 9; // Adjust the threshold as needed
+    return formattedText.length > 9;
   };
 
   const getBackgroundColor = (interest) => {

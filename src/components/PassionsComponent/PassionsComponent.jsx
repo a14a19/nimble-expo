@@ -25,6 +25,9 @@ const PassionsComponent = () => {
   const isLongText = (formattedText) => {
     return formattedText.length > 9;
   };
+  const isShortText = (formattedText) => {
+    return formattedText.length <= 4;
+  };
 
   const getBackgroundColor = (interest) => {
     return selectedInterests[interest] ? "bg-violet-500" : "bg-gray-200";
@@ -39,6 +42,7 @@ const PassionsComponent = () => {
       emoji,
       formattedInterest,
       isLong: isLongText(formattedInterest),
+      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -51,6 +55,7 @@ const PassionsComponent = () => {
       emoji,
       formattedInterest,
       isLong: isLongText(formattedInterest),
+      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -63,6 +68,7 @@ const PassionsComponent = () => {
       emoji,
       formattedInterest,
       isLong: isLongText(formattedInterest),
+      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -77,6 +83,7 @@ const PassionsComponent = () => {
         emoji,
         formattedInterest,
         isLong: isLongText(formattedInterest),
+        isShort: isShortText(formattedInterest),
         backgroundColor: getBackgroundColor(interest, selectedInterests),
       };
     });
@@ -89,6 +96,7 @@ const PassionsComponent = () => {
       emoji,
       formattedInterest,
       isLong: isLongText(formattedInterest),
+      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -125,6 +133,7 @@ const PassionsComponent = () => {
                 emoji,
                 formattedInterest,
                 isLong,
+                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
@@ -132,7 +141,7 @@ const PassionsComponent = () => {
                   onPress={() => toggleInterest(interest)}
                   className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
-                  }`}
+                  } ${isShort ? "w-[90px]" : "w-[110px]"}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
@@ -156,6 +165,7 @@ const PassionsComponent = () => {
                 emoji,
                 formattedInterest,
                 isLong,
+                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
@@ -163,7 +173,7 @@ const PassionsComponent = () => {
                   onPress={() => toggleInterest(interest)}
                   className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
-                  }`}
+                  }  ${isShort ? "w-[90px]" : "w-[110px]"}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
@@ -187,14 +197,15 @@ const PassionsComponent = () => {
                 emoji,
                 formattedInterest,
                 isLong,
+                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor}  ${
                     isLong ? "w-[111px]" : "w-[111px]"
-                  }`}
+                  }  ${isShort ? "w-[90px]" : "w-[110px]"}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
@@ -220,14 +231,16 @@ const PassionsComponent = () => {
                 emoji,
                 formattedInterest,
                 isLong,
+                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
-                    isLong ? "w-[130px]" : "w-[102px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-1 p-1 ${backgroundColor} ${
+                    isLong ? "w-[130px]" : "w-[111px]"
+                  }
+                  ${isShort ? "w-[90px]" : "w-[114px]"}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
@@ -251,6 +264,7 @@ const PassionsComponent = () => {
                 emoji,
                 formattedInterest,
                 isLong,
+                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
@@ -258,7 +272,7 @@ const PassionsComponent = () => {
                   onPress={() => toggleInterest(interest)}
                   className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
                     isLong ? "w-[130px]" : "w-[110px]"
-                  }`}
+                  }  ${isShort ? "w-[90px]" : "w-[98px]"}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text

@@ -4,12 +4,12 @@
     "slug": "nimbleexpo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/Vector.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./src/assets/Vector.png",
+      "resizeMode": "fit",
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -17,12 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./src/assets/Vector.png",
+        "backgroundColor": "#000000"
       }
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./src/assets/Vector.png"
     }
   }
 }

@@ -187,7 +187,6 @@ const SignupScreen = () => {
               Have an Account? Sign In
             </Text>
           </View>
-          <StatusBar style="auto" />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

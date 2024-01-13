@@ -24,7 +24,6 @@ export default function LoginScreen() {
                     <Text style={styles.text} >{pressed ? 'SignIn Form!' : 'First Time User? Sign In!'}</Text>
                 )}
             </Pressable>
-            <StatusBar style="auto" />
         </View>
     )
 }

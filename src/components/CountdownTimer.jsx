@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Text } from "react-native";
 
-const CountdownTimer = ({ startDuration, handleClick }) => {
+const CountdownTimer = ({ startDuration, handleClick, triggerTimer }) => {
 
     const [startTime, setStartTime] = useState("00:00");
 
     useEffect(() => {
         startTimer(startDuration);
-    }, []);
+    }, [triggerTimer]);
 
     function startTimer(duration) {
-        console.log("timer started")
+        // console.log("timer started")
         var timer = duration, minutes, seconds;
         const interval = setInterval(() => {
             minutes = parseInt(timer / 60, 10);
@@ -27,7 +27,7 @@ const CountdownTimer = ({ startDuration, handleClick }) => {
             }
         }, 1000);
         function clearInt() {
-            console.log("set interval removed")
+            // console.log("set interval removed")
             return clearInterval(interval)
         }
     }

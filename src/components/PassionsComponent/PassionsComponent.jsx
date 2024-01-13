@@ -110,7 +110,7 @@ const PassionsComponent = () => {
       <ScrollView className="bg-white">
         <View className="p-4">
           <Pressable
-            onPress={() => navigateTo.navigate("Home")}
+            onPress={() => navigateTo.navigate("Verification")}
             className="mb-5"
           >
             <AntDesign name="left" size={24} color="black" />

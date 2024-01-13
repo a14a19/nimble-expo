@@ -17,7 +17,6 @@ export default function HomeScreen() {
         >
           {({ pressed }) => <Text>{pressed ? "Pressed!" : "Press Me"}</Text>}
         </Pressable>
-        <StatusBar style="auto" />
       </View>
     </SafeAreaView>
   );

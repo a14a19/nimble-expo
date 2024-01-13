@@ -81,7 +81,6 @@ export default function VerificationScreen() {
                 </View>
                 {hasError && <Text className="flex text-left px-[6%] text-red-700">Please enter all the fields!</Text>}
                 <GradientButton pVertical={`0%`} onPress={checkErrors} label="Verify" pVerticalBtn={`4%`} mTop={`20%`} />
-                <StatusBar style="auto" />
             </View>
         </SafeAreaView>
     )

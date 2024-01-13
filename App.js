@@ -1,61 +1,20 @@
-import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./src/screens/HomeScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./src/screens/LoginScreen";
-import SignInScreen from "./src/screens/SignInScreen";
-import VerificationScreen from "./src/screens/VerificationScreen";
-import VerifyNumber from "./src/screens/VerifyNumber";
-import SignupScreen from "./src/screens/SignupScreen";
-import OnboardingScreen from "./src/screens/OnboardingScreen";
-import PassionsScreen from "./src/screens/PassionsScreen";
+import { Provider } from "react-redux"
+import { StatusBar, Platform } from "react-native";
+
+import store from "./src/redux/store";
+import Main from "./src/Main";
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Before"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={OnboardingScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignupScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Verification"
-          component={VerificationScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="VerifyNumber"
-          component={VerifyNumber}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Passions"
-          component={PassionsScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Main />
+      {
+        Platform.OS ?
+          <StatusBar barStyle="dark-content" showHideTransition={true} networkActivityIndicatorVisible={true} animated={true} />
+          :
+          <StatusBar translucent={true} animated={true} />
+      }
+    </Provider>
   );
 }

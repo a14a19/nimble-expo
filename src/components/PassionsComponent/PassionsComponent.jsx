@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 //Custom Hooks
 import useEmoji from "../../hooks/useEmoji";
-import useFormattedInterest from "../../hooks/useFormattedInterests";
+import useFormattedInterests from "../../hooks/useFormattedInterests";
 import useDefaultValues from "../../hooks/useDefaultValues";
 
 const PassionsComponent = () => {
@@ -33,7 +33,7 @@ const PassionsComponent = () => {
   //Hook Data
   const FoodAndDrinkData = displayInterests.slice(0, 11).map((interest) => {
     const emoji = useEmoji(interest);
-    const formattedInterest = useFormattedInterest(interest);
+    const formattedInterest = useFormattedInterests(interest);
     return {
       interest,
       emoji,
@@ -45,7 +45,7 @@ const PassionsComponent = () => {
 
   const EntertainmentData = displayInterests.slice(11, 22).map((interest) => {
     const emoji = useEmoji(interest);
-    const formattedInterest = useFormattedInterest(interest);
+    const formattedInterest = useFormattedInterests(interest);
     return {
       interest,
       emoji,
@@ -57,7 +57,7 @@ const PassionsComponent = () => {
 
   const SportsData = displayInterests.slice(22, 33).map((interest) => {
     const emoji = useEmoji(interest);
-    const formattedInterest = useFormattedInterest(interest);
+    const formattedInterest = useFormattedInterests(interest);
     return {
       interest,
       emoji,
@@ -71,7 +71,7 @@ const PassionsComponent = () => {
     .slice(33, 41)
     .map((interest) => {
       const emoji = useEmoji(interest);
-      const formattedInterest = useFormattedInterest(interest);
+      const formattedInterest = useFormattedInterests(interest);
       return {
         interest,
         emoji,
@@ -83,7 +83,7 @@ const PassionsComponent = () => {
 
   const PetsData = displayInterests.slice(41, 46).map((interest) => {
     const emoji = useEmoji(interest);
-    const formattedInterest = useFormattedInterest(interest);
+    const formattedInterest = useFormattedInterests(interest);
     return {
       interest,
       emoji,

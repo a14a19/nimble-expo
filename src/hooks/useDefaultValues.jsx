@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 
-const useInterests = () => {
-  const defaultValues = useMemo(() => {
+const useDefaultValues = () => {
+  return useMemo(() => {
     return {
-      //Food and Drink
+      // Food and Drink
       Italian: false,
       Japanese: false,
       Chinese: false,
@@ -42,7 +42,7 @@ const useInterests = () => {
       Badminton: false,
       Lacrosse: false,
 
-      //Traveling & Activities
+      // Traveling & Activities
       Roadtrip: false,
       Camping: false,
       Scuba: false,
@@ -52,7 +52,7 @@ const useInterests = () => {
       Cooking: false,
       Sightseeing: false,
 
-      //Pets
+      // Pets
       Dogs: false,
       Cats: false,
       Fish: false,
@@ -60,8 +60,6 @@ const useInterests = () => {
       Reptiles: false,
     };
   }, []);
-
-  return defaultValues;
 };
 
-export default useInterests;
+export default useDefaultValues;

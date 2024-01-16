@@ -17,9 +17,9 @@ export default function HollowButton({ onPress, label, mTop, pVertical }) {
         borderWidth={2}
         borderRadius={50}
       >
-        <Text style={[styles.textStyle, { paddingVertical: pVertical }]}>{label}</Text>
+        <Text style={[styles.textStyle, { paddingVertical: pVertical, fontFamily: "mont-semibold" }]}>{label}</Text>
       </LinearGradient>
-    </View>
+    </View >
   );
 }
 

@@ -1,33 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Pressable, SafeAreaView, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { changeBoolean } from "../features/forms/formSlice";
 
 //Custom Hooks
-import useEmoji from "../../hooks/useEmoji";
-import useFormattedInterests from "../../hooks/useFormattedInterests";
-import useDefaultValues from "../../hooks/useDefaultValues";
+import useEmoji from "../hooks/useEmoji";
+import useFormattedInterests from "../hooks/useFormattedInterests";
 
 const PassionsComponent = () => {
+
+  const dispatch = useDispatch();
+  const { passions } = useSelector((store) => store.form)
+
   const navigateTo = useNavigation();
-  const defaultValues = useDefaultValues();
+
+  const selectedInterests = passions; //IMPORTANT!! - Watches for changes in form state
   const { control, handleSubmit, setValue, watch } = useForm({
-    defaultValues: defaultValues,
+    defaultValues: passions,
   });
 
-  const selectedInterests = watch(); //IMPORTANT!! - Watches for changes in form state
+  // console.log("control", control);
+
   const toggleInterest = (interest) => {
-    setValue(interest, !selectedInterests[interest]);
+    dispatch(changeBoolean({ name: interest }));
+    // setValue(interest, !selectedInterests[interest]);
   };
 
-  const displayInterests = Object.keys(control._defaultValues); //display interests!
-  const isLongText = (formattedText) => {
-    return formattedText.length > 9;
-  };
-  const isShortText = (formattedText) => {
-    return formattedText.length <= 4;
-  };
+  const displayInterests = Object.keys(passions); //display interests!
 
   const getBackgroundColor = (interest) => {
     return selectedInterests[interest] ? "bg-violet-500" : "bg-gray-200";
@@ -41,8 +43,6 @@ const PassionsComponent = () => {
       interest,
       emoji,
       formattedInterest,
-      isLong: isLongText(formattedInterest),
-      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -54,8 +54,6 @@ const PassionsComponent = () => {
       interest,
       emoji,
       formattedInterest,
-      isLong: isLongText(formattedInterest),
-      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -67,8 +65,6 @@ const PassionsComponent = () => {
       interest,
       emoji,
       formattedInterest,
-      isLong: isLongText(formattedInterest),
-      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
@@ -82,8 +78,6 @@ const PassionsComponent = () => {
         interest,
         emoji,
         formattedInterest,
-        isLong: isLongText(formattedInterest),
-        isShort: isShortText(formattedInterest),
         backgroundColor: getBackgroundColor(interest, selectedInterests),
       };
     });
@@ -95,13 +89,12 @@ const PassionsComponent = () => {
       interest,
       emoji,
       formattedInterest,
-      isLong: isLongText(formattedInterest),
-      isShort: isShortText(formattedInterest),
       backgroundColor: getBackgroundColor(interest, selectedInterests),
     };
   });
 
   const onSubmit = (data) => {
+    console.log("data");
     console.log(data);
   };
 
@@ -126,28 +119,23 @@ const PassionsComponent = () => {
 
           {/* Food and Drink Map */}
           <Text className="text-2xl mb-3 font-semibold">Food & Drink</Text>
-          <View className="flex flex-row flex-wrap items-center mb-4">
+          <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {FoodAndDrinkData.map(
               ({
                 interest,
                 emoji,
                 formattedInterest,
-                isLong,
-                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-1 p-1 ${backgroundColor} ${
-                    isLong ? "w-[130px]" : isShort ? "w-[90px]" : "w-[111px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`flex-1 text-center mr-1.5 ${
-                      selectedInterests[interest] ? "text-white" : "text-black"
-                    }`}
+                    className={`text-center mr-1.5 ${selectedInterests[interest] ? "text-white" : "text-black"
+                      }`}
                   >
                     {formattedInterest}
                   </Text>
@@ -158,28 +146,23 @@ const PassionsComponent = () => {
 
           {/* Entertainment Map */}
           <Text className="text-2xl mb-3 font-semibold">Entertainment</Text>
-          <View className="flex flex-row flex-wrap items-center mb-4">
+          <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {EntertainmentData.map(
               ({
                 interest,
                 emoji,
                 formattedInterest,
-                isLong,
-                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-1 p-1 ${backgroundColor} ${
-                    isLong ? "w-[130px]" : isShort ? "w-[90px]" : "w-[111px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`flex-1 text-center mr-1.5 ${
-                      selectedInterests[interest] ? "text-white" : "text-black"
-                    }`}
+                    className={`text-center mr-1.5 ${selectedInterests[interest] ? "text-white" : "text-black"
+                      }`}
                   >
                     {formattedInterest}
                   </Text>
@@ -190,28 +173,25 @@ const PassionsComponent = () => {
 
           {/* Sports Map */}
           <Text className="text-2xl mb-3 font-semibold">Sports</Text>
-          <View className="flex flex-row flex-wrap items-center mb-4">
+          <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {SportsData.map(
               ({
                 interest,
                 emoji,
                 formattedInterest,
-                isLong,
-                isShort,
                 backgroundColor,
               }) => (
+                // ${isLong ? "w-[120px]" : isShort ? "w-[90px]" : "w-[107px]"
+                // }
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
-                    isLong ? "w-[120px]" : isShort ? "w-[90px]" : "w-[107px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor} `}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`flex-1 text-center mr-1.5 ${
-                      selectedInterests[interest] ? "text-white" : "text-black"
-                    }`}
+                    className={`text-center mr-1.5 ${selectedInterests[interest] ? "text-white" : "text-black"
+                      }`}
                   >
                     {formattedInterest}
                   </Text>
@@ -224,28 +204,24 @@ const PassionsComponent = () => {
           <Text className="text-2xl mb-3 font-semibold">
             Travelling & Activities
           </Text>
-          <View className="flex flex-row flex-wrap items-center mb-4">
+          <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {TravelAndActivitiesData.map(
               ({
                 interest,
                 emoji,
                 formattedInterest,
-                isLong,
-                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
-                    isLong ? "w-[130px]" : isShort ? "w-[90px]" : "w-[111px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor} `}
                 >
+                  {/* ${isLong ? "w-[130px]" : isShort ? "w-[90px]" : "w-[111px]"} */}
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`flex-1 text-center mr-1.5 ${
-                      selectedInterests[interest] ? "text-white" : "text-black"
-                    }`}
+                    className={`text-center mr-1.5 ${selectedInterests[interest] ? "text-white" : "text-black"
+                      }`}
                   >
                     {formattedInterest}
                   </Text>
@@ -256,28 +232,23 @@ const PassionsComponent = () => {
 
           {/* Pets */}
           <Text className="text-2xl mb-3 font-semibold">Pets</Text>
-          <View className="flex flex-row flex-wrap items-center mb-4">
+          <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {PetsData.map(
               ({
                 interest,
                 emoji,
                 formattedInterest,
-                isLong,
-                isShort,
                 backgroundColor,
               }) => (
                 <Pressable
                   key={interest}
                   onPress={() => toggleInterest(interest)}
-                  className={`rounded-2xl border border-slate-200 flex-row items-center justify-center mb-2 mr-2 p-1 ${backgroundColor} ${
-                    isLong ? "w-[130px]" : isShort ? "w-[110px]" : "w-[111px]"
-                  }`}
+                  className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`flex-1 text-center mr-1.5 ${
-                      selectedInterests[interest] ? "text-white" : "text-black"
-                    }`}
+                    className={`text-center mr-1.5 ${selectedInterests[interest] ? "text-white" : "text-black"
+                      }`}
                   >
                     {formattedInterest}
                   </Text>

@@ -1,4 +1,4 @@
-import PassionsComponent from "../components/PassionsComponent/PassionsComponent";
+import PassionsComponent from "../components/PassionsComponent";
 
 const PassionsScreen = () => {
   return <PassionsComponent />;

@@ -9,55 +9,60 @@ import VerifyNumber from "./VerifyNumber";
 import SignupScreen from "./SignupScreen";
 import OnboardingScreen from "./OnboardingScreen";
 import PassionsScreen from "./PassionsScreen";
+import TraitsScreen from "./TraitsScreen";
 
 export default function StackScreens() {
+  const Stack = createNativeStackNavigator();
 
-    const Stack = createNativeStackNavigator();
-
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                {/* <Stack.Screen
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* <Stack.Screen
           name="Before"
           component={HomeScreen}
           options={{ headerShown: false }}
         /> */}
-                {/* <Stack.Screen
+        {/* <Stack.Screen
             name="Login"
             component={LoginScreen}
             options={{ headerShown: false }}
           /> */}
-                <Stack.Screen
-                    name="OnboardingScreen"
-                    component={OnboardingScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="SignIn"
-                    component={SignInScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="SignUp"
-                    component={SignupScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Verification"
-                    component={VerificationScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="VerifyNumber"
-                    component={VerifyNumber}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Passions"
-                    component={PassionsScreen}
-                    options={{ headerShown: false }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
-};
+        <Stack.Screen
+          name="OnboardingScreen"
+          component={OnboardingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Verification"
+          component={VerificationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="VerifyNumber"
+          component={VerifyNumber}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Passions"
+          component={PassionsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Traits"
+          component={TraitsScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

@@ -16,7 +16,7 @@ export default function GradientButton({ onPress, label, mTop, pVertical, pVerti
 
         borderRadius={50}
       >
-        <Text style={[styles.textStyle, { paddingVertical: pVertical }]}>{label}</Text>
+        <Text style={[styles.textStyle, { paddingVertical: pVertical, fontFamily: "mont-semibold" }]}>{label}</Text>
       </LinearGradient>
     </View>
   );

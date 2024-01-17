@@ -10,6 +10,8 @@ import SignupScreen from "./SignupScreen";
 import OnboardingScreen from "./OnboardingScreen";
 import PassionsScreen from "./PassionsScreen";
 import TraitsScreen from "./TraitsScreen";
+import PreferencesScreen from "./PreferencesScreen";
+import LookingToFindScreen from "./LookingToFindScreen";
 
 export default function StackScreens() {
   const Stack = createNativeStackNavigator();
@@ -62,7 +64,17 @@ export default function StackScreens() {
           component={TraitsScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Preferences"
+          component={PreferencesScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LookingToFind"
+          component={LookingToFindScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-}
+  )
+};

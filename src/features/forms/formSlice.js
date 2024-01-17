@@ -124,7 +124,7 @@ const formSlice = createSlice({
       );
     },
     mergeFormData: (state, action) => {
-      const obj = { ...state.passionsCategories, ...state.traitsCateogories };
+      const obj = { ...state.passionsCategories, ...state.traitsCategories };
     },
   },
 });

@@ -36,8 +36,8 @@ function OnboardingScreen() {
                             pVertical={`0%`}
                             pVerticalBtn={`4%`}
                             onPress={() => {
-                                dispatch(userSignInApi({ body: { email: "admin@yopmail.com", password: "Aa@12345" }, params: "", options: "" }))
-                                // navigation.navigate("SignUp");
+
+                                navigation.navigate("SignUp");
                             }}
                             label="Create Account"
                             mTop={marginTopValue}

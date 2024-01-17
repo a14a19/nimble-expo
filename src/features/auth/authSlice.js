@@ -6,7 +6,12 @@ import axios from 'axios';
 const url = process.env.EXPO_PUBLIC_API_URL
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    userData: {},
+    token: "",
+    errors: []
+    
+
 }
 
 export const userSignInApi = createAsyncThunk("auth/userSignIn", async (payload, thunkAPI) => {
@@ -31,6 +36,20 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(userSignInApi.fulfilled, (state, { payload }) => {
             console.log("Fulfilled", payload)
+            if (payload.errors) {
+                state.errors = payload.errors
+                state.isLoggedIn = payload.status
+                state.userData = {}
+                state.token = ""
+                
+            } else {
+                state.userData = payload.data
+                state.errors = []
+                state.token = payload.token
+                state.isLoggedIn = payload.status
+            }
+
+
         })
         builder.addCase(userSignInApi.rejected, (state, { payload }) => {
             console.log("Rejected", payload)

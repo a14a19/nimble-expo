@@ -2,8 +2,11 @@ import { Image, Text, View, TextInput, Pressable, SafeAreaView } from 'react-nat
 import { useNavigation } from '@react-navigation/native';
 import GradientButton from '../utils/GradientButton';
 import HollowButton from '../utils/HollowButton';
+import { useDispatch } from "react-redux";
+import { userSignInApi } from '../features/auth/authSlice';
 
 function OnboardingScreen() {
+    const dispatch = useDispatch()
     const navigation = useNavigation();
     const marginTopValue = "3%";
     return (
@@ -30,7 +33,8 @@ function OnboardingScreen() {
                         pVertical={`0%`}
                         pVerticalBtn={`4%`}
                         onPress={() => {
-                            navigation.navigate("SignUp");
+                            dispatch(userSignInApi({ body: { email: "admin@yopmail.com", password: "A@12345" }, params: "", options: "" }))
+                            // navigation.navigate("SignUp");
                         }}
                         label="Create Account"
                         mTop={marginTopValue}

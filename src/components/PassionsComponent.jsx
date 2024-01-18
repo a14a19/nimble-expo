@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
+import GradientButton from "../utils/GradientButton";
 import { changeBoolean } from "../features/forms/formSlice";
 
 //Custom Hooks

@@ -1,9 +1,12 @@
-# To get started -
+# Nimble (React Native - Expo)
 
-1. npm i
-2. npm start
-3. Press s for development build and scan the QR, that will take you to the "Expo go" app
-4. If an error occurs, use - npm i expo-dev-client
+## To get started -
+
+1. create a .env file in root and copy all the variables from .env.example and paste it in .env with appropriate values
+2. npm i
+3. npm start
+4. Press s for development build and scan the QR, that will take you to the "Expo go" app
+5. If an error occurs, use - npm i expo-dev-client
 
 ### Tips -
 

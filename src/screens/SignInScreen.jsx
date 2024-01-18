@@ -70,11 +70,19 @@ function SignInScreen() {
                             className="px-1 border border-slate-300 bg-neutral-100 h-[14%] rounded-lg w-auto mx-[4%]"
                             type='email'
                             placeholder=""
+                            secureTextEntry={true}
                             onChangeText={handlePassword}
                         />
                         {haserror && <Text className="px-[4%] mt-[1%] py-1 text-red-500" >{ErrorMsg}</Text>}
-
-
+                        {/* <View>
+                            <Pressable
+                                onPress={() => {
+                                    navigation.navigate("LookingToFind");
+                                }}
+                            >
+                                <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
+                            </Pressable>
+                        </View> */}
                         <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
                     </View>
                     <View>

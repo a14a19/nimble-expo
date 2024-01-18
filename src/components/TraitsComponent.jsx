@@ -1,14 +1,19 @@
+//React
 import React, { useEffect, useState, useCallback } from "react";
 import { Text, View, Pressable, SafeAreaView, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
-import { useForm } from "react-hook-form";
+
+//redux
 import { useSelector, useDispatch } from "react-redux";
-import GradientButton from "../utils/GradientButton";
 import { changeBoolean } from "../features/forms/formSlice";
 
 //Custom Hooks
 import useFormattedInterests from "../hooks/useFormattedInterests";
+
+//Buttons
+import HollowButton from "../utils/HollowButton";
+import GradientButton from "../utils/GradientButton";
+import { AntDesign } from "@expo/vector-icons";
 
 const TraitsComponent = () => {
   const dispatch = useDispatch();
@@ -37,16 +42,20 @@ const TraitsComponent = () => {
   }, [traitsCategories]);
 
   const toggleInterest = useCallback(
-    (interest, category, type) => {
+    (interest, category) => {
       if (category === "AstrologySign") {
-        // Special handling for AstrologySign category
+        const currentStatus = traitsCategories.AstrologySign[interest];
+
+        // Create an object with all false values, except the current interest
         const updatedAstrologySigns = Object.keys(
           traitsCategories.AstrologySign
         ).reduce((acc, key) => {
-          acc[key] = false; // Set all to false
+          acc[key] = false;
           return acc;
         }, {});
-        updatedAstrologySigns[interest] = true; // Set the selected one to true
+
+        // Toggle the current interest's value
+        updatedAstrologySigns[interest] = !currentStatus;
 
         // Dispatch the updated state for AstrologySign
         dispatch(
@@ -60,10 +69,10 @@ const TraitsComponent = () => {
         // Update the category counts for AstrologySign
         setCategoryCounts((prev) => ({
           ...prev,
-          [category]: 1, // Only one interest can be selected in AstrologySign
+          [category]: updatedAstrologySigns[interest] ? 1 : 0,
         }));
       } else {
-        // Existing logic for other categories
+        // Logic for other categories
         const categoryInterests = traitsCategories[category];
         const selectedInterestsCount = Object.values(categoryInterests).filter(
           (value) => value
@@ -88,6 +97,11 @@ const TraitsComponent = () => {
     },
     [dispatch, traitsCategories]
   );
+
+  const personalityTraitsSelected =
+    Object.values(traitsCategories.Personality).filter(
+      (isSelected) => isSelected
+    ).length > 0;
 
   const getBackgroundColor = (isSelected) => {
     return isSelected ? "bg-violet-500" : "bg-gray-200";
@@ -197,6 +211,19 @@ const TraitsComponent = () => {
             )}
           </View>
         </View>
+
+        {personalityTraitsSelected ? (
+          <GradientButton
+            pVertical={`1%`}
+            onPress={() => navigateTo.navigate("Traits")}
+            label={`Continue`}
+            pVerticalBtn={`4%`}
+            mTop={`30%`}
+          />
+        ) : (
+          <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
+        )}
+        <Text> WILL WORK ON THE NEXT PART DO NOT CLICK CONTINUE!</Text>
       </ScrollView>
     </SafeAreaView>
   );

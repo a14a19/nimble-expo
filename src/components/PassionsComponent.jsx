@@ -1,16 +1,20 @@
+//React
 import React, { useEffect, useState, useCallback } from "react";
 import { Text, View, Pressable, SafeAreaView, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
-import { useForm } from "react-hook-form";
+
+//redux
 import { useSelector, useDispatch } from "react-redux";
-import GradientButton from "../utils/GradientButton";
 import { changeBoolean } from "../features/forms/formSlice";
 
 //Custom Hooks
 import useEmoji from "../hooks/useEmoji";
 import useFormattedInterests from "../hooks/useFormattedInterests";
+
+//Buttons
 import HollowButton from "../utils/HollowButton";
+import GradientButton from "../utils/GradientButton";
+import { AntDesign } from "@expo/vector-icons";
 
 const PassionsComponent = () => {
   const marginTopValue = "3%";

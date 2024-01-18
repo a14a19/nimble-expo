@@ -96,7 +96,7 @@ const initialState = {
       Leo: false,
       Virgo: false,
       Libra: false,
-      Scorpius: false,
+      Scorpio: false,
       Sagittarius: false,
       Capricorn: false,
       Aquarius: false,

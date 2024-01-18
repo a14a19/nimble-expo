@@ -114,18 +114,22 @@ const formSlice = createSlice({
       state.name = action.payload.name;
     },
     changeBoolean: (state, { payload }) => {
-      const { name, category, type } = payload;
+      const { name, category, type, value } = payload;
 
-      if (
+      if (type === "traits" && category === "AstrologySign") {
+        if (typeof value === "object") {
+          state.traitsCategories[category] = value;
+        } else {
+          state.traitsCategories[category][name] =
+            !state.traitsCategories[category][name];
+        }
+      } else if (
         type === "passions" &&
         category &&
         state.passionsCategories[category]
       ) {
         state.passionsCategories[category][name] =
           !state.passionsCategories[category][name];
-        console.log(
-          `Toggled passions ${category}: ${name} to ${state.passionsCategories[category][name]}`
-        );
       } else if (
         type === "traits" &&
         category &&
@@ -133,9 +137,6 @@ const formSlice = createSlice({
       ) {
         state.traitsCategories[category][name] =
           !state.traitsCategories[category][name];
-        console.log(
-          `Toggled traits ${category}: ${name} to ${state.traitsCategories[category][name]}`
-        );
       }
     },
 

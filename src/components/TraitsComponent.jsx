@@ -38,27 +38,53 @@ const TraitsComponent = () => {
 
   const toggleInterest = useCallback(
     (interest, category, type) => {
-      const categoryInterests = traitsCategories[category];
-      const selectedInterestsCount = Object.values(categoryInterests).filter(
-        (value) => value === true
-      ).length;
+      if (category === "AstrologySign") {
+        // Special handling for AstrologySign category
+        const updatedAstrologySigns = Object.keys(
+          traitsCategories.AstrologySign
+        ).reduce((acc, key) => {
+          acc[key] = false; // Set all to false
+          return acc;
+        }, {});
+        updatedAstrologySigns[interest] = true; // Set the selected one to true
 
-      // Check if the user has already selected 5 interests in this category
-      if (selectedInterestsCount >= 5 && !categoryInterests[interest]) {
-        // User has already selected 5 interests, can't select more
-        return;
+        // Dispatch the updated state for AstrologySign
+        dispatch(
+          changeBoolean({
+            category,
+            type: "traits",
+            value: updatedAstrologySigns,
+          })
+        );
+
+        // Update the category counts for AstrologySign
+        setCategoryCounts((prev) => ({
+          ...prev,
+          [category]: 1, // Only one interest can be selected in AstrologySign
+        }));
+      } else {
+        // Existing logic for other categories
+        const categoryInterests = traitsCategories[category];
+        const selectedInterestsCount = Object.values(categoryInterests).filter(
+          (value) => value
+        ).length;
+
+        if (selectedInterestsCount >= 5 && !categoryInterests[interest]) {
+          // User has already selected 5 interests, can't select more
+          return;
+        }
+
+        // Toggle the state in Redux for other categories
+        dispatch(changeBoolean({ name: interest, category, type: "traits" }));
+
+        // Update the category counts for other categories
+        setCategoryCounts((prev) => ({
+          ...prev,
+          [category]: categoryInterests[interest]
+            ? prev[category] - 1
+            : prev[category] + 1,
+        }));
       }
-
-      // Toggle the state in Redux
-      dispatch(changeBoolean({ name: interest, category, type: "traits" }));
-
-      // Update the category counts
-      setCategoryCounts((prev) => ({
-        ...prev,
-        [category]: categoryInterests[interest]
-          ? prev[category] - 1
-          : prev[category] + 1,
-      }));
     },
     [dispatch, traitsCategories]
   );

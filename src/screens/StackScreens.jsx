@@ -12,6 +12,7 @@ import PassionsScreen from "./PassionsScreen";
 import TraitsScreen from "./TraitsScreen";
 import PreferencesScreen from "./PreferencesScreen";
 import LookingToFindScreen from "./LookingToFindScreen";
+import SexualOrientationScreen from "./SexualOrientationScreen";
 
 export default function StackScreens() {
   const Stack = createNativeStackNavigator();
@@ -72,6 +73,11 @@ export default function StackScreens() {
         <Stack.Screen
           name="LookingToFind"
           component={LookingToFindScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SexualOrientation"
+          component={SexualOrientationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

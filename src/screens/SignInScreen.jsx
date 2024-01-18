@@ -74,7 +74,7 @@ function SignInScreen() {
                             onChangeText={handlePassword}
                         />
                         {haserror && <Text className="px-[4%] mt-[1%] py-1 text-red-500" >{ErrorMsg}</Text>}
-                        {/* <View>
+                        <View>
                             <Pressable
                                 onPress={() => {
                                     navigation.navigate("LookingToFind");
@@ -82,8 +82,8 @@ function SignInScreen() {
                             >
                                 <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
                             </Pressable>
-                        </View> */}
-                        <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
+                        </View>
+                        {/* <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text> */}
                     </View>
                     <View>
                         <View className=" mt-16">

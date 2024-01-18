@@ -10,8 +10,10 @@ import { changeBoolean } from "../features/forms/formSlice";
 //Custom Hooks
 import useEmoji from "../hooks/useEmoji";
 import useFormattedInterests from "../hooks/useFormattedInterests";
+import HollowButton from "../utils/HollowButton";
 
 const PassionsComponent = () => {
+  const marginTopValue = "3%";
   const dispatch = useDispatch();
   const { passionsCategories } = useSelector((store) => store.form);
   const navigateTo = useNavigation();
@@ -44,7 +46,7 @@ const PassionsComponent = () => {
   }, [passionsCategories]);
 
   const toggleInterest = useCallback(
-    (interest, category) => {
+    (interest, category, type) => {
       const categoryInterests = passionsCategories[category];
       const selectedInterestsCount = Object.values(categoryInterests).filter(
         (value) => value === true
@@ -57,7 +59,7 @@ const PassionsComponent = () => {
       }
 
       // Toggle the state in Redux
-      dispatch(changeBoolean({ name: interest, category }));
+      dispatch(changeBoolean({ name: interest, category, type: "passions" }));
 
       // Update the category counts
       setCategoryCounts((prev) => ({
@@ -68,6 +70,10 @@ const PassionsComponent = () => {
       }));
     },
     [dispatch, passionsCategories]
+  );
+
+  const allCategoriesSelected = Object.values(categoryCounts).every(
+    (count) => count >= 1
   );
 
   const getBackgroundColor = (isSelected) => {
@@ -286,8 +292,23 @@ const PassionsComponent = () => {
               ({ interest, emoji, formattedInterest, backgroundColor }) => (
                 <Pressable
                   key={interest}
-                  onPress={() => toggleInterest(interest, "Pets")}
+                  onPress={() => {
+                    if (
+                      passionsCategories.Pets.NoPets &&
+                      interest !== "NoPets"
+                    ) {
+                      return passionsCategories.Pets === false;
+                    }
+
+                    toggleInterest(interest, "Pets", "passions");
+                  }}
                   className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
+                  style={{
+                    opacity:
+                      passionsCategories.Pets.NoPets && interest !== "NoPets"
+                        ? 0.5
+                        : 1,
+                  }}
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
@@ -305,13 +326,17 @@ const PassionsComponent = () => {
             )}
           </View>
 
-          <GradientButton
-            pVertical={`1%`}
-            onPress={() => handleContinue()}
-            label={`Continue`}
-            pVerticalBtn={`4%`}
-            mTop={`30%`}
-          />
+          {allCategoriesSelected ? (
+            <GradientButton
+              pVertical={`1%`}
+              onPress={() => navigateTo.navigate("Traits")}
+              label={`Continue`}
+              pVerticalBtn={`4%`}
+              mTop={`30%`}
+            />
+          ) : (
+            <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

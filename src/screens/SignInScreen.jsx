@@ -83,7 +83,6 @@ function SignInScreen() {
                                 <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
                             </Pressable>
                         </View> */}
-
                         <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
                     </View>
                     <View>

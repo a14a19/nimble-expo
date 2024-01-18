@@ -63,6 +63,7 @@ const initialState = {
       Fish: false,
       Birds: false,
       Reptiles: false,
+      NoPets: false,
     },
   },
   traitsCategories: {
@@ -95,7 +96,7 @@ const initialState = {
       Leo: false,
       Virgo: false,
       Libra: false,
-      Scorpius: false,
+      Scorpio: false,
       Sagittarius: false,
       Capricorn: false,
       Aquarius: false,
@@ -113,18 +114,45 @@ const formSlice = createSlice({
       state.name = action.payload.name;
     },
     changeBoolean: (state, { payload }) => {
-      const { name, category } = payload;
+      const { name, category, type, value } = payload;
 
-      if (category && state.passionsCategories[category]) {
+      if (type === "traits" && category === "AstrologySign") {
+        if (typeof value === "object") {
+          state.traitsCategories[category] = value;
+        } else {
+          state.traitsCategories[category][name] =
+            !state.traitsCategories[category][name];
+        }
+      } else if (
+        type === "passions" &&
+        category &&
+        state.passionsCategories[category]
+      ) {
         state.passionsCategories[category][name] =
           !state.passionsCategories[category][name];
+      } else if (
+        type === "traits" &&
+        category &&
+        state.traitsCategories[category]
+      ) {
+        state.traitsCategories[category][name] =
+          !state.traitsCategories[category][name];
       }
-      console.log(
-        `Toggled ${category}: ${name} to ${state.passionsCategories[category][name]}`
-      );
     },
+
     mergeFormData: (state, action) => {
-      const obj = { ...state.passionsCategories, ...state.traitsCateogories };
+      const obj = {
+        ...state.passionsCategories.FoodAndDrink,
+        ...state.passionsCategories.Entertainment,
+        ...state.passionsCategories.Pets,
+        ...state.passionsCategories.Sports,
+        ...state.passionsCategories.TravellingAndActivities,
+        ...state.traitsCategories.AstrologySign,
+        ...state.traitsCategories.Personality,
+      };
+
+      console.log(obj);
+      state.mergeForm = obj;
     },
   },
 });

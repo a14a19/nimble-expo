@@ -104,6 +104,8 @@ const useEmoji = (interest) => {
         return "🐦";
       case "Reptiles":
         return "🐢";
+      case "NoPets":
+        return " 🙈";
 
       //Default Case
       default:

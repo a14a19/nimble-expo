@@ -153,7 +153,7 @@ const TraitsComponent = () => {
               ({ interest, formattedInterest, backgroundColor }) => (
                 <Pressable
                   key={interest}
-                  onPress={() => toggleInterest(interest, "AstrologySignData")}
+                  onPress={() => toggleInterest(interest, "AstrologySign")}
                   className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
                 >
                   <Text

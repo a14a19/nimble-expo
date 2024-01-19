@@ -5,7 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { changeBoolean } from "../features/forms/formSlice";
+import {
+  changeBoolean,
+  setSelectedInterests,
+} from "../features/forms/formSlice";
 
 //Custom Hooks
 import useFormattedInterests from "../hooks/useFormattedInterests";
@@ -97,6 +100,27 @@ const TraitsComponent = () => {
     },
     [dispatch, traitsCategories]
   );
+
+  const gatherSelectedInterests = (interests) => {
+    return Object.entries(interests)
+      .filter(([_, isSelected]) => isSelected)
+      .map(([interest, _]) => interest);
+  };
+
+  //USE THIS BUTTON TO TEST THE DISPATCH!
+  const handleSubmit = () => {
+    Object.keys(traitsCategories).forEach((category) => {
+      const selectedInterests = gatherSelectedInterests(
+        traitsCategories[category]
+      );
+
+      console.log(selectedInterests);
+
+      dispatch(
+        setSelectedInterests({ category, interests: selectedInterests })
+      );
+    });
+  };
 
   const personalityTraitsSelected =
     Object.values(traitsCategories.Personality).filter(
@@ -211,7 +235,6 @@ const TraitsComponent = () => {
             )}
           </View>
         </View>
-
         {personalityTraitsSelected ? (
           <GradientButton
             pVertical={`1%`}
@@ -224,6 +247,13 @@ const TraitsComponent = () => {
           <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
         )}
         <Text> WILL WORK ON THE NEXT PART DO NOT CLICK CONTINUE!</Text>
+        {/* <GradientButton
+          pVertical={`1%`}
+          onPress={() => handleSubmit()}
+          label={`Submit All Categories`}
+          pVerticalBtn={`4%`}
+          mTop={`30%`}
+        /> */}
       </ScrollView>
     </SafeAreaView>
   );

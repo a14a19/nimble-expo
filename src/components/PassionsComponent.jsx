@@ -5,7 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { changeBoolean } from "../features/forms/formSlice";
+import {
+  changeBoolean,
+  setSelectedInterests,
+} from "../features/forms/formSlice";
 
 //Custom Hooks
 import useEmoji from "../hooks/useEmoji";
@@ -17,7 +20,6 @@ import GradientButton from "../utils/GradientButton";
 import { AntDesign } from "@expo/vector-icons";
 
 const PassionsComponent = () => {
-  const marginTopValue = "3%";
   const dispatch = useDispatch();
   const { passionsCategories } = useSelector((store) => store.form);
   const navigateTo = useNavigation();
@@ -29,6 +31,7 @@ const PassionsComponent = () => {
     TravellingAndActivities: 0,
     Pets: 0,
   });
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const initialCounts = {
@@ -48,6 +51,27 @@ const PassionsComponent = () => {
 
     setCategoryCounts(initialCounts);
   }, [passionsCategories]);
+
+  const gatherSelectedInterests = (interests) => {
+    return Object.entries(interests)
+      .filter(([_, isSelected]) => isSelected)
+      .map(([interest, _]) => interest);
+  };
+
+  //USE THIS BUTTON TO TEST THE DISPATCH!
+  const handleSubmit = () => {
+    Object.keys(passionsCategories).forEach((category) => {
+      const selectedInterests = gatherSelectedInterests(
+        passionsCategories[category]
+      );
+
+      console.log(selectedInterests);
+
+      dispatch(
+        setSelectedInterests({ category, interests: selectedInterests })
+      );
+    });
+  };
 
   const toggleInterest = useCallback(
     (interest, category, type) => {
@@ -79,6 +103,14 @@ const PassionsComponent = () => {
   const allCategoriesSelected = Object.values(categoryCounts).every(
     (count) => count >= 1
   );
+
+  const handlePress = () => {
+    if (!allCategoriesSelected) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  };
 
   const getBackgroundColor = (isSelected) => {
     return isSelected ? "bg-violet-500" : "bg-gray-200";
@@ -329,18 +361,40 @@ const PassionsComponent = () => {
               )
             )}
           </View>
+          <View>
+            {allCategoriesSelected ? (
+              <GradientButton
+                pVertical={`1%`}
+                onPress={() => navigateTo.navigate("Traits")}
+                label={`Continue`}
+                pVerticalBtn={`4%`}
+                mTop={`10%`}
+              />
+            ) : (
+              <View>
+                {showWarning && (
+                  <Text className="mt-5 ml-5" style={{ color: "red" }}>
+                    Please select at least one interest in each category to
+                    continue!
+                  </Text>
+                )}
+                <HollowButton
+                  onPress={handlePress}
+                  label="Continue"
+                  mTop={`10%`}
+                  pVertical={`4%`}
+                />
+              </View>
+            )}
+          </View>
 
-          {allCategoriesSelected ? (
-            <GradientButton
-              pVertical={`1%`}
-              onPress={() => navigateTo.navigate("Traits")}
-              label={`Continue`}
-              pVerticalBtn={`4%`}
-              mTop={`30%`}
-            />
-          ) : (
-            <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
-          )}
+          {/* <GradientButton
+            pVertical={`1%`}
+            onPress={() => handleSubmit()}
+            label={`Submit All Categories`}
+            pVerticalBtn={`4%`}
+            mTop={`30%`}
+          /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

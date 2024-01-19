@@ -3,6 +3,20 @@ import { FlatListComponent } from "react-native";
 
 const initialState = {
   name: "",
+
+  //Receivables (selected button entries) from 'Form' components.
+
+  //PassionsComponent Arrays
+  FoodAndDrink: [],
+  Entertainment: [],
+  Sports: [],
+  TravellingAndActivities: [],
+  Pets: [],
+
+  //TraitsComponent Arrays
+  Personality: [],
+  AstrologySign: [],
+
   passionsCategories: {
     FoodAndDrink: {
       Italian: false,
@@ -140,6 +154,11 @@ const formSlice = createSlice({
       }
     },
 
+    setSelectedInterests: (state, action) => {
+      const { category, interests } = action.payload;
+      state[category] = interests;
+    },
+
     mergeFormData: (state, action) => {
       const obj = {
         ...state.passionsCategories.FoodAndDrink,
@@ -157,6 +176,6 @@ const formSlice = createSlice({
   },
 });
 
-export const { nextForm, changeBoolean } = formSlice.actions;
-
+export const { nextForm, changeBoolean, setSelectedInterests } =
+  formSlice.actions;
 export default formSlice.reducer;

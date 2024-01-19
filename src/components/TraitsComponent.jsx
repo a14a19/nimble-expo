@@ -5,7 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { changeBoolean } from "../features/forms/formSlice";
+import {
+  changeBoolean,
+  setSelectedInterests,
+} from "../features/forms/formSlice";
 
 //Custom Hooks
 import useFormattedInterests from "../hooks/useFormattedInterests";
@@ -24,6 +27,7 @@ const TraitsComponent = () => {
     Personality: 0,
     AstrologySign: 0,
   });
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const initialCounts = {
@@ -98,10 +102,39 @@ const TraitsComponent = () => {
     [dispatch, traitsCategories]
   );
 
+  const gatherSelectedInterests = (interests) => {
+    return Object.entries(interests)
+      .filter(([_, isSelected]) => isSelected)
+      .map(([interest, _]) => interest);
+  };
+
+  //USE THIS BUTTON TO TEST THE DISPATCH!
+  const handleSubmit = () => {
+    Object.keys(traitsCategories).forEach((category) => {
+      const selectedInterests = gatherSelectedInterests(
+        traitsCategories[category]
+      );
+
+      console.log(selectedInterests);
+
+      dispatch(
+        setSelectedInterests({ category, interests: selectedInterests })
+      );
+    });
+  };
+
   const personalityTraitsSelected =
     Object.values(traitsCategories.Personality).filter(
       (isSelected) => isSelected
     ).length > 0;
+
+  const handlePress = () => {
+    if (!personalityTraitsSelected) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  };
 
   const getBackgroundColor = (isSelected) => {
     return isSelected ? "bg-violet-500" : "bg-gray-200";
@@ -211,19 +244,43 @@ const TraitsComponent = () => {
             )}
           </View>
         </View>
+        <View>
+          <Text className="text-center ">
+            WILL WORK ON THE NEXT PART CONTINUE DOES NOT WORK!
+          </Text>
+          {personalityTraitsSelected ? (
+            <GradientButton
+              pVertical={`1%`}
+              onPress={() => navigateTo.navigate("Traits")}
+              label={`Continue`}
+              pVerticalBtn={`4%`}
+              mTop={`10%`}
+            />
+          ) : (
+            <View>
+              {showWarning && (
+                <Text className="mt-5 text-[25px] text-center text-red-600">
+                  Please select at least one trait that describes you!
+                </Text>
+              )}
 
-        {personalityTraitsSelected ? (
-          <GradientButton
-            pVertical={`1%`}
-            onPress={() => navigateTo.navigate("Traits")}
-            label={`Continue`}
-            pVerticalBtn={`4%`}
-            mTop={`30%`}
-          />
-        ) : (
-          <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
-        )}
-        <Text> WILL WORK ON THE NEXT PART DO NOT CLICK CONTINUE!</Text>
+              <HollowButton
+                onPress={handlePress}
+                label="Continue"
+                mTop={`10%`}
+                pVertical={`4%`}
+              />
+            </View>
+          )}
+        </View>
+
+        {/* <GradientButton
+          pVertical={`1%`}
+          onPress={() => handleSubmit()}
+          label={`Submit All Categories`}
+          pVerticalBtn={`4%`}
+          mTop={`30%`}
+        /> */}
       </ScrollView>
     </SafeAreaView>
   );

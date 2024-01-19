@@ -10,16 +10,19 @@ import GradientButton from "../utils/GradientButton"
 
 function SexualOrientationScreen() {
     const navigateTo = useNavigation();
-   
+    const [hasError, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [selectedGender, setSelectedGender] = useState(0);
     const [selectedOrientation, setSelectedOrientation] = useState(0);
     const [selectedChoice, setSelectedChoice] = useState(0);
-    const data = [' ','Male','Female','Non-Binary','Trans','Other','Straight', 'Gay', 'Bisexual', 'Pansexual', 'Asexual', 'Men', 'Women', 'Non-binary', 'Everyone'];
+    const data = [' ', 'Male', 'Female', 'Non-Binary', 'Trans', 'Other', 'Straight', 'Gay', 'Bisexual', 'Pansexual', 'Asexual', 'Men', 'Women', 'Non-binary', 'Everyone'];
     const handleSubmit = () => {
         if (selectedChoice > 0 && selectedGender > 0 && selectedOrientation > 0) {
-            console.log(data[selectedGender],data[selectedOrientation],data[selectedChoice] )
-            
+            console.log(data[selectedGender], data[selectedOrientation], data[selectedChoice])
             navigateTo.navigate("Preferences");
+        } else {
+            setError(true);
+            setErrorMessage("Please select one option from each of the sections!")
         }
 
     }
@@ -272,8 +275,9 @@ function SexualOrientationScreen() {
                     </View>
 
                     <View className="flex text-left px-[4%] pb-[5%] ">
+                        {hasError && <Text className="flex text-center pt-[2%] text-red-500" >{errorMessage}</Text>}
 
-                        <View className=" mt-16">
+                        <View className="mt-[6%]">
                             <GradientButton pVertical={`0%`}
                                 onPress={handleSubmit}
                                 label="Continue"

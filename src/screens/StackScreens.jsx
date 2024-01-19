@@ -13,6 +13,9 @@ import TraitsScreen from "./TraitsScreen";
 import PreferencesScreen from "./PreferencesScreen";
 import LookingToFindScreen from "./LookingToFindScreen";
 import SexualOrientationScreen from "./SexualOrientationScreen";
+import ForgotPasswordScreen from "./ForgotPasswordScreen";
+import VerifyEmailScreen from "./VerifyEmailScreen";
+import ChangePasswordScreen from "./ChangePasswordScreen";
 
 export default function StackScreens() {
   const Stack = createNativeStackNavigator();
@@ -78,6 +81,21 @@ export default function StackScreens() {
         <Stack.Screen
           name="SexualOrientation"
           component={SexualOrientationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="VerifyEmail"
+          component={VerifyEmailScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePasswordScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

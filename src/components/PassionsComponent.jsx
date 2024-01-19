@@ -373,7 +373,7 @@ const PassionsComponent = () => {
             ) : (
               <View>
                 {showWarning && (
-                  <Text className="mt-5 ml-5" style={{ color: "red" }}>
+                  <Text className="mt-5 text-[25px] text-center text-red-600">
                     Please select at least one interest in each category to
                     continue!
                   </Text>

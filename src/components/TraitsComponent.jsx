@@ -27,6 +27,7 @@ const TraitsComponent = () => {
     Personality: 0,
     AstrologySign: 0,
   });
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const initialCounts = {
@@ -126,6 +127,14 @@ const TraitsComponent = () => {
     Object.values(traitsCategories.Personality).filter(
       (isSelected) => isSelected
     ).length > 0;
+
+  const handlePress = () => {
+    if (!personalityTraitsSelected) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  };
 
   const getBackgroundColor = (isSelected) => {
     return isSelected ? "bg-violet-500" : "bg-gray-200";
@@ -235,18 +244,36 @@ const TraitsComponent = () => {
             )}
           </View>
         </View>
-        {personalityTraitsSelected ? (
-          <GradientButton
-            pVertical={`1%`}
-            onPress={() => navigateTo.navigate("Traits")}
-            label={`Continue`}
-            pVerticalBtn={`4%`}
-            mTop={`30%`}
-          />
-        ) : (
-          <HollowButton label="Continue" mTop={`30%`} pVertical={`4%`} />
-        )}
-        <Text> WILL WORK ON THE NEXT PART DO NOT CLICK CONTINUE!</Text>
+        <View>
+          <Text className="text-center ">
+            WILL WORK ON THE NEXT PART CONTINUE DOES NOT WORK!
+          </Text>
+          {personalityTraitsSelected ? (
+            <GradientButton
+              pVertical={`1%`}
+              onPress={() => navigateTo.navigate("Traits")}
+              label={`Continue`}
+              pVerticalBtn={`4%`}
+              mTop={`10%`}
+            />
+          ) : (
+            <View>
+              {showWarning && (
+                <Text className="mt-5 text-[25px] text-center text-red-600">
+                  Please select at least one trait that describes you!
+                </Text>
+              )}
+
+              <HollowButton
+                onPress={handlePress}
+                label="Continue"
+                mTop={`10%`}
+                pVertical={`4%`}
+              />
+            </View>
+          )}
+        </View>
+
         {/* <GradientButton
           pVertical={`1%`}
           onPress={() => handleSubmit()}

@@ -3,15 +3,16 @@ import { FlatListComponent } from "react-native";
 
 const initialState = {
   name: "",
-  //Receivables (selected button entries) from Form Components
-  //PassionsComponent
+  //Receivables (selected button entries) from 'Form' components.
+
+  //PassionsComponent Arrays
   FoodAndDrink: [],
   Entertainment: [],
   Sports: [],
   TravellingAndActivities: [],
   Pets: [],
 
-  //TraitsComponent
+  //TraitsComponent Arrays
   Personality: [],
   AstrologySign: [],
 

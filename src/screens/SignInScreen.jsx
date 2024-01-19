@@ -54,9 +54,9 @@ function SignInScreen() {
             <SafeAreaView>
                 <View className="flex flex-col h-full justify-between bg-white text-black  pt-[8%]">
                     <View>
-                        <Text className="flex text-left font-bold text-2xl pl-[4%] pb-[6%]">Sign In</Text>
+                        <Text className="flex text-left font-bold text-3xl pl-[4%] pb-[6%]" style={{ fontFamily: "mont-semibold" }}>Sign In</Text>
 
-                        <Text className="px-[4%] py-1">Enter your Email Address</Text>
+                        <Text className="px-[4%] py-1" style={{ fontFamily: "mont-med" }}>Enter your Email Address</Text>
 
                         <TextInput
                             className="px-1 border  border-slate-300 bg-neutral-100 h-[14%] rounded-lg w-auto mx-[4%]"
@@ -65,7 +65,7 @@ function SignInScreen() {
                         />
                         {hasEmailError && <Text className="px-[4%] mt-[1%] py-1 text-red-500" >{emailErrorMessage}</Text>}
 
-                        <Text className="px-[4%] mt-[3%] py-1">Enter Your Password</Text>
+                        <Text className="px-[4%] mt-[3%] py-1" style={{ fontFamily: "mont-med" }}>Enter Your Password</Text>
                         <TextInput
                             className="px-1 border border-slate-300 bg-neutral-100 h-[14%] rounded-lg w-auto mx-[4%]"
                             type='email'
@@ -77,10 +77,10 @@ function SignInScreen() {
                         <View>
                             <Pressable
                                 onPress={() => {
-                                    navigation.navigate("LookingToFind");
+                                    navigation.navigate("ForgotPassword");
                                 }}
                             >
-                                <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text>
+                                <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] " style={{ fontFamily: "mont-med" }}>Forgot Password?</Text>
                             </Pressable>
                         </View>
                         {/* <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] ">Forgot Password?</Text> */}
@@ -97,13 +97,13 @@ function SignInScreen() {
                             />
                         </View>
 
-                        <View className=" ">
+                        <View className=" " >
                             <Pressable
                                 onPress={() => {
                                     navigation.navigate("SignUp");
                                 }}
                             >
-                                <Text className=" flex text-center mt-4 mb-2 text-sm text-[#F21464]">Dont have and Account? Sign Up!</Text>
+                                <Text className=" flex text-center mt-4 mb-2 text-sm text-[#F21464]" style={{ fontFamily: "mont-med" }}>Dont have and Account? Sign Up!</Text>
                             </Pressable>
                         </View>
                     </View>

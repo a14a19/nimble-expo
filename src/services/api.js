@@ -1,29 +1,32 @@
 import axios from "axios";
 
-const url = process.env.EXPO_PUBLIC_API_URL
+const url = process.env.EXPO_PUBLIC_API_URL;
 
 export const userSignIn = async (body, params, options) => {
-    const resp = await axios.request({
-        url: `${url}/users/sign-in`,
-        method: "post",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        withCredentials: true,
-        data: body,
-    });
-    return resp;
-}
+  console.log(body, url);
+  const resp = await axios.request({
+    url: `${url}/users/sign-in`,
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+    data: body,
+  });
+  return resp;
+};
 
 export const userFinalSignUp = async (body, params, options) => {
-    const resp = await axios.request({
-        url: `${url}/users/update/${params.id}`,
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        withCredentials: true,
-        data: body,
-    });
-    return resp;
-}
+  const resp = await axios.request({
+    url: `${url}/users/update/${params.id}`,
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+    data: body,
+  });
+  console.log(url);
+  console.log(resp);
+  return resp;
+};

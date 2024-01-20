@@ -128,14 +128,20 @@ const initialState = {
   },
 };
 
-export const userFinalSignUpAPI = createAsyncThunk("form/userFinalSignUp", async (payload, thunkAPI) => {
-  try {
-    return userFinalSignUp(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response.data);
-  } catch (e) {
-    thunkAPI.rejectWithValue("form error - ", e)
-    return e
+export const userFinalSignUpAPI = createAsyncThunk(
+  "form/userFinalSignUp",
+  async (payload, thunkAPI) => {
+    try {
+      return userFinalSignUp(payload.body, payload.params, payload.options)
+        .then((res) => res.data)
+        .catch((e) => e.response.data);
+    } catch (e) {
+      console.log(e);
+      thunkAPI.rejectWithValue("form error - ", e);
+      return e;
+    }
   }
-})
+);
 
 const formSlice = createSlice({
   name: "form",
@@ -192,7 +198,7 @@ const formSlice = createSlice({
 
     mergeFormData: (state, action) => {
       const obj = {
-        FoodAndDrink: state.FoodAndDrink
+        FoodAndDrink: state.FoodAndDrink,
       };
 
       console.log(obj);
@@ -201,15 +207,16 @@ const formSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(userFinalSignUpAPI.fulfilled, (state, { payload }) => {
-      console.log("user form updated fulfilled", state, payload)
-    })
+      console.log("user form updated fulfilled", payload);
+    });
     builder.addCase(userFinalSignUpAPI.pending, (state, { payload }) => {
-      console.log("user form updated pending", state, payload)
-    })
+      console.log("user form updated pending", payload);
+    });
     builder.addCase(userFinalSignUpAPI.rejected, (state, { payload }) => {
-      console.log("user form updated rejected", state, payload)
-    })
-  }
+      const url = process.env.EXPO_PUBLIC_API_URL;
+      console.log("user form updated rejected", url, payload);
+    });
+  },
 });
 
 export const {

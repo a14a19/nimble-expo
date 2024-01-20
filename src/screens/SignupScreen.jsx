@@ -59,7 +59,7 @@ const SignupScreen = () => {
 
   const onSubmit = () => {
     console.log(fullName, email, dateOfBirth)
-    navigation.navigate("Verification")
+    navigate.navigate("VerifyNumber")
   }
 
   return (

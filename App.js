@@ -32,9 +32,9 @@ export default function App() {
 
     (async function () {
       await SplashScreen.hideAsync();
-      console.log("font loaded", fontsLoaded)
+      // console.log("font loaded", fontsLoaded, Platform)
     })();
-    console.log("font not loaded", fontsLoaded)
+    // console.log("font not loaded", fontsLoaded, Platform)
   }, [fontsLoaded])
 
   return (
@@ -45,7 +45,7 @@ export default function App() {
         <Main />
       }
       {
-        Platform.OS === "iOS" ?
+        Platform.OS === "ios" ?
           <StatusBar barStyle="dark-content" showHideTransition={true} networkActivityIndicatorVisible={true} animated={true} />
           :
           <StatusBar translucent={true} animated={true} />

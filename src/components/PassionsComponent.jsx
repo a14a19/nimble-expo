@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeBoolean,
   setSelectedInterests,
+  userFinalSignUpAPI,
 } from "../features/forms/formSlice";
 
 //Custom Hooks
@@ -21,7 +22,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 const PassionsComponent = () => {
   const dispatch = useDispatch();
-  const { passionsCategories } = useSelector((store) => store.form);
+  const { passionsCategories, FoodAndDrink, Entertainment } = useSelector((store) => store.form);
   const navigateTo = useNavigation();
 
   const [categoryCounts, setCategoryCounts] = useState({
@@ -65,7 +66,7 @@ const PassionsComponent = () => {
         passionsCategories[category]
       );
 
-      console.log(selectedInterests);
+      console.log(category, selectedInterests);
 
       dispatch(
         setSelectedInterests({ category, interests: selectedInterests })
@@ -207,11 +208,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.FoodAndDrink[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    } `}
+                    className={`text-center mr-1.5 ${passionsCategories.FoodAndDrink[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      } `}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -238,11 +238,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Entertainment[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Entertainment[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -269,11 +268,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Sports[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Sports[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -302,11 +300,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.TravellingAndActivities[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.TravellingAndActivities[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -348,11 +345,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Pets[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Pets[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -392,6 +388,22 @@ const PassionsComponent = () => {
             pVertical={`1%`}
             onPress={() => handleSubmit()}
             label={`Submit All Categories`}
+            pVerticalBtn={`4%`}
+            mTop={`30%`}
+          /> */}
+
+          {/* Final Submit demo */}
+          {/* <GradientButton
+            pVertical={`1%`}
+            onPress={() => dispatch(userFinalSignUpAPI({
+              body: {
+                FoodAndDrink: FoodAndDrink,
+                Entertainment: Entertainment
+              },
+              params: { id: "65aa8fb1f561b5078bde1fe0" },
+              options: {}
+            }))}
+            label={`Final Submit`}
             pVerticalBtn={`4%`}
             mTop={`30%`}
           /> */}

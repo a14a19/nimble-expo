@@ -14,3 +14,16 @@ export const userSignIn = async (body, params, options) => {
     });
     return resp;
 }
+
+export const userFinalSignUp = async (body, params, options) => {
+    const resp = await axios.request({
+        url: `${url}/users/update/${params.id}`,
+        method: "put",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true,
+        data: body,
+    });
+    return resp;
+}

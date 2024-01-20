@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FlatListComponent } from "react-native";
+import { userFinalSignUp } from "../../services/api";
 
 const initialState = {
   name: "",
@@ -127,6 +128,15 @@ const initialState = {
   },
 };
 
+export const userFinalSignUpAPI = createAsyncThunk("form/userFinalSignUp", async (payload, thunkAPI) => {
+  try {
+    return userFinalSignUp(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response.data);
+  } catch (e) {
+    thunkAPI.rejectWithValue("form error - ", e)
+    return e
+  }
+})
+
 const formSlice = createSlice({
   name: "form",
   initialState,
@@ -182,19 +192,24 @@ const formSlice = createSlice({
 
     mergeFormData: (state, action) => {
       const obj = {
-        ...state.passionsCategories.FoodAndDrink,
-        ...state.passionsCategories.Entertainment,
-        ...state.passionsCategories.Pets,
-        ...state.passionsCategories.Sports,
-        ...state.passionsCategories.TravellingAndActivities,
-        ...state.traitsCategories.AstrologySign,
-        ...state.traitsCategories.Personality,
+        FoodAndDrink: state.FoodAndDrink
       };
 
       console.log(obj);
       state.mergeForm = obj;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(userFinalSignUpAPI.fulfilled, (state, { payload }) => {
+      console.log("user form updated fulfilled", state, payload)
+    })
+    builder.addCase(userFinalSignUpAPI.pending, (state, { payload }) => {
+      console.log("user form updated pending", state, payload)
+    })
+    builder.addCase(userFinalSignUpAPI.rejected, (state, { payload }) => {
+      console.log("user form updated rejected", state, payload)
+    })
+  }
 });
 
 export const {

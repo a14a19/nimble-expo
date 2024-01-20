@@ -17,6 +17,14 @@ const initialState = {
   Personality: [],
   AstrologySign: [],
 
+  //LookingToFind Arrays
+  LookingToFind: [],
+
+  //SexualOrientation Ararys
+  Gender: [],
+  SexualOrientation: [],
+  GenderCriteria: [],
+
   passionsCategories: {
     FoodAndDrink: {
       Italian: false,
@@ -159,6 +167,19 @@ const formSlice = createSlice({
       state[category] = interests;
     },
 
+    setSelectedPreferences: (state, action) => {
+      const { category, preferences } = action.payload;
+      if (category === "LookingToFind") {
+        state.LookingToFind = [preferences];
+      } else if (category === "Gender") {
+        state.Gender = [preferences];
+      } else if (category === "SexualOrientation") {
+        state.SexualOrientation = [preferences];
+      } else if (category === "GenderCriteria") {
+        state.GenderCriteria = [preferences];
+      }
+    },
+
     mergeFormData: (state, action) => {
       const obj = {
         ...state.passionsCategories.FoodAndDrink,
@@ -176,6 +197,10 @@ const formSlice = createSlice({
   },
 });
 
-export const { nextForm, changeBoolean, setSelectedInterests } =
-  formSlice.actions;
+export const {
+  nextForm,
+  changeBoolean,
+  setSelectedInterests,
+  setSelectedPreferences,
+} = formSlice.actions;
 export default formSlice.reducer;

@@ -128,14 +128,20 @@ const initialState = {
   },
 };
 
-export const userFinalSignUpAPI = createAsyncThunk("form/userFinalSignUp", async (payload, thunkAPI) => {
-  try {
-    return userFinalSignUp(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response.data);
-  } catch (e) {
-    thunkAPI.rejectWithValue("form error - ", e)
-    return e
+export const userFinalSignUpAPI = createAsyncThunk(
+  "form/userFinalSignUp",
+  async (payload, thunkAPI) => {
+    try {
+      return userFinalSignUp(payload.body, payload.params, payload.options)
+        .then((res) => res.data)
+        .catch((e) => e.response.data);
+    } catch (e) {
+      console.log(e);
+      thunkAPI.rejectWithValue("form error - ", e);
+      return e;
+    }
   }
-})
+);
 
 export const userProfileUpdateAPI = createAsyncThunk("form/userProfileUpdate", async (payload, thunkAPI) => {
   try {
@@ -201,7 +207,7 @@ const formSlice = createSlice({
 
     mergeFormData: (state, action) => {
       const obj = {
-        FoodAndDrink: state.FoodAndDrink
+        FoodAndDrink: state.FoodAndDrink,
       };
 
       console.log(obj);

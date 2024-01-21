@@ -173,7 +173,7 @@ const PassionsComponent = () => {
     <SafeAreaView className="flex-1">
       <ScrollView className="bg-white">
         <View className="p-4 mt-11">
-          <View className="flex w-[358px] h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
+          <View className="flex w-full h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
             <View className="w-[53px] h-1 bg-purple-500 rounded-md" />
           </View>
 
@@ -185,20 +185,20 @@ const PassionsComponent = () => {
           </Pressable>
 
           <Text
-            className="text-5xl font-semibold mb-5"
+            className="text-3xl mb-5"
             style={{ fontFamily: "mont-semibold" }}
           >
             What are your passions?
           </Text>
 
-          <Text className="text-lg mb-8" style={{ fontFamily: "mont-med" }}>
+          <Text className="text-base mb-8" style={{ fontFamily: "mont-med" }}>
             Pick up to five interests. We will try to find dates who share those
             interests.
           </Text>
 
           {/* Food and Drink Map */}
           <Text
-            className="text-2xl mb-3"
+            className="text-xl mb-3"
             style={{ fontFamily: "mont-semibold" }}
           >
             Food & Drink
@@ -231,7 +231,7 @@ const PassionsComponent = () => {
 
           {/* Entertainment Map */}
           <Text
-            className="text-2xl mb-3"
+            className="text-xl mb-3"
             style={{ fontFamily: "mont-semibold" }}
           >
             Entertainment
@@ -262,7 +262,7 @@ const PassionsComponent = () => {
 
           {/* Sports Map */}
           <Text
-            className="text-2xl mb-3"
+            className="text-xl mb-3"
             style={{ fontFamily: "mont-semibold" }}
           >
             Sports
@@ -293,7 +293,7 @@ const PassionsComponent = () => {
 
           {/* Travelling & Activities */}
           <Text
-            className="text-2xl mb-3"
+            className="text-xl mb-3"
             style={{ fontFamily: "mont-semibold" }}
           >
             Travelling & Activities
@@ -326,7 +326,7 @@ const PassionsComponent = () => {
 
           {/* Pets */}
           <Text
-            className="text-2xl mb-3"
+            className="text-xl mb-3"
             style={{ fontFamily: "mont-semibold" }}
           >
             Pets

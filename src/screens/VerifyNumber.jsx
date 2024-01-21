@@ -83,15 +83,15 @@ export default function VerifyNumber() {
                 <View className="flex flex-col h-full justify-between" >
                     <View>
                         <AntDesign name="left" size={24} color="black" onPress={() => navigation.navigate("Verification")} style={{ paddingTop: 10, paddingLeft: 10 }} />
-                        <Text className="flex text-left font-bold text-3xl pl-[4%] pb-[3%] mt-5">Enter your Number</Text>
-                        <Text className="flex text-left px-[4%] text-base">Enter the 4 digits code we’ve texted to +1234567890</Text>
+                        <Text className="flex text-left text-3xl pl-[4%] pb-[3%] mt-5" style={{ fontFamily: "mont-semibold" }}>Enter your Number</Text>
+                        <Text className="flex text-left px-[4%] text-base" style={{ fontFamily: "mont-med" }}>Enter the 4 digits code we’ve texted to +1234567890</Text>
                     </View>
 
                     <View className="flex flex-row w-1/2 justify-between mx-auto">
-                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" caretHidden={false} keyboardType="numeric" maxLength={1} ref={input1} onChange={(e) => handleChangeInput(e, "input2")} value={inputs.input1} />
-                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" caretHidden={false} keyboardType="numeric" maxLength={1} ref={input2} onChange={(e) => handleChangeInput(e, "input3")} value={inputs.input2} />
-                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" caretHidden={false} keyboardType="numeric" maxLength={1} ref={input3} onChange={(e) => handleChangeInput(e, "input4")} value={inputs.input3} />
-                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" caretHidden={false} keyboardType="numeric" maxLength={1} ref={input4} onChange={(e) => handleChangeInput(e, "input1")} value={inputs.input4} />
+                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" style={{ fontFamily: "mont-semibold" }} caretHidden={false} keyboardType="numeric" maxLength={1} ref={input1} onChange={(e) => handleChangeInput(e, "input2")} value={inputs.input1} />
+                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" style={{ fontFamily: "mont-semibold" }} caretHidden={false} keyboardType="numeric" maxLength={1} ref={input2} onChange={(e) => handleChangeInput(e, "input3")} value={inputs.input2} />
+                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" style={{ fontFamily: "mont-semibold" }} caretHidden={false} keyboardType="numeric" maxLength={1} ref={input3} onChange={(e) => handleChangeInput(e, "input4")} value={inputs.input3} />
+                        <TextInput className="w-10 h-12 border border-gray-400 rounded-lg pb-0.5 text-center text-3xl" style={{ fontFamily: "mont-semibold" }} caretHidden={false} keyboardType="numeric" maxLength={1} ref={input4} onChange={(e) => handleChangeInput(e, "input1")} value={inputs.input4} />
                     </View>
 
                     {/* Empty view  */}

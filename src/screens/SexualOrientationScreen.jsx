@@ -82,7 +82,7 @@ function SexualOrientationScreen() {
     <SafeAreaView className="flex-1">
       <ScrollView className="bg-white">
         <View className="p-4 mt-11">
-          <View className="flex w-[358px] h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
+          <View className="flex w-full h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
             <View className="w-[230px] h-1 bg-purple-500 rounded-md" />
           </View>
 

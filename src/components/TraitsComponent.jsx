@@ -160,7 +160,7 @@ const TraitsComponent = () => {
     <SafeAreaView className="flex-1">
       <ScrollView className="bg-white">
         <View className="p-4 mt-11">
-          <View className="flex w-[358px] h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
+          <View className="flex w-full h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
             <View className="w-[100px] h-1 bg-purple-500 rounded-md" />
           </View>
 
@@ -172,19 +172,19 @@ const TraitsComponent = () => {
           </Pressable>
 
           <Text
-            className="text-4xl font-semibold mb-5"
+            className="text-3xl mb-5"
             style={{ fontFamily: "mont-semibold" }}
           >
             What type of person are you?
           </Text>
 
-          <Text className="text-lg mb-8" style={{ fontFamily: "mont-med" }}>
+          <Text className="text-base mb-8" style={{ fontFamily: "mont-med" }}>
             Pick up to five traits that best describe you as a person.
           </Text>
 
           {/* Personality Data*/}
           <Text
-            className="text-2xl mb-4"
+            className="text-xl mb-4"
             style={{ fontFamily: "mont-semibold" }}
           >
             Personality
@@ -216,7 +216,7 @@ const TraitsComponent = () => {
 
           {/* Astrology Data */}
           <Text
-            className="text-2xl mb-4"
+            className="text-xl mb-4"
             style={{ fontFamily: "mont-semibold" }}
           >
             Astrology Sign
@@ -251,7 +251,7 @@ const TraitsComponent = () => {
           {personalityTraitsSelected ? (
             <GradientButton
               pVertical={`1%`}
-              onPress={() => navigateTo.navigate("Traits")}
+              onPress={() => navigateTo.navigate("LookingToFind")}
               label={`Continue`}
               pVerticalBtn={`4%`}
               mTop={`10%`}

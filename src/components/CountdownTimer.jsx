@@ -33,11 +33,11 @@ const CountdownTimer = ({ startDuration, handleClick, triggerTimer }) => {
     }
 
     if (startTime == "00:00") {
-        return <Text className="flex px-[4%] pt-[5%] text-center text-rose-600" onPress={() => handleClick()}>Resend</Text>;
+        return <Text className="flex px-[4%] pt-[5%] text-center text-rose-600" onPress={() => handleClick()} style={{ fontFamily: "mont-semibold" }}>Resend</Text>;
     }
 
     return (
-        <Text className="flex px-[4%] pt-[5%] text-center text-rose-300">
+        <Text className="flex px-[4%] pt-[5%] text-center text-rose-300" style={{ fontFamily: "mont-semibold" }}>
             Resend in: {startTime}
         </Text>
     );

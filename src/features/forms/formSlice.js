@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FlatListComponent } from "react-native";
-import { userFinalSignUp } from "../../services/api";
+import { userFinalSignUp, userProfileUpdate } from "../../services/api";
 
 const initialState = {
   name: "",
@@ -143,6 +143,15 @@ export const userFinalSignUpAPI = createAsyncThunk(
   }
 );
 
+export const userProfileUpdateAPI = createAsyncThunk("form/userProfileUpdate", async (payload, thunkAPI) => {
+  try {
+    return userProfileUpdate(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response.data);
+  } catch (e) {
+    thunkAPI.rejectWithValue("form error - ", e)
+    return e
+  }
+})
+
 const formSlice = createSlice({
   name: "form",
   initialState,
@@ -207,16 +216,24 @@ const formSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(userFinalSignUpAPI.fulfilled, (state, { payload }) => {
-      console.log("user form updated fulfilled", payload);
-    });
+      console.log("user form updated fulfilled", payload)
+    })
     builder.addCase(userFinalSignUpAPI.pending, (state, { payload }) => {
-      console.log("user form updated pending", payload);
-    });
+      console.log("user form updated pending", payload)
+    })
     builder.addCase(userFinalSignUpAPI.rejected, (state, { payload }) => {
-      const url = process.env.EXPO_PUBLIC_API_URL;
-      console.log("user form updated rejected", url, payload);
-    });
-  },
+      console.log("user form updated rejected", payload)
+    })
+    builder.addCase(userProfileUpdateAPI.fulfilled, (state, { payload }) => {
+      console.log("user form updated fulfilled", payload)
+    })
+    builder.addCase(userProfileUpdateAPI.pending, (state, { payload }) => {
+      console.log("user form updated pending", payload)
+    })
+    builder.addCase(userProfileUpdateAPI.rejected, (state, { payload }) => {
+      console.log("user form updated rejected", payload)
+    })
+  }
 });
 
 export const {

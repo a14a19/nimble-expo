@@ -16,6 +16,7 @@ import SexualOrientationScreen from "./SexualOrientationScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import VerifyEmailScreen from "./VerifyEmailScreen";
 import ChangePasswordScreen from "./ChangePasswordScreen";
+import AddPhoto from "./AddPhoto";
 
 
 export default function StackScreens() {
@@ -92,6 +93,11 @@ export default function StackScreens() {
         <Stack.Screen
           name="VerifyEmail"
           component={VerifyEmailScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddPhoto"
+          component={AddPhoto}
           options={{ headerShown: false }}
         />
         <Stack.Screen

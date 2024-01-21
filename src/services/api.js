@@ -27,3 +27,16 @@ export const userFinalSignUp = async (body, params, options) => {
     });
     return resp;
 }
+
+export const userProfileUpdate = async (body, params, options) => {
+    const resp = await axios.request({
+        url: `${url}/users/update-profile-pic/${params.id}`,
+        method: "put",
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        withCredentials: true,
+        data: body,
+    });
+    return resp;
+}

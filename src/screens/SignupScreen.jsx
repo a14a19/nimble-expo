@@ -70,10 +70,10 @@ const SignupScreen = () => {
             className="px-4 py-4 flex gap-2 bg-white"
             style={{ width: Dimensions.get("window").width }}
           >
-            <Text className="font-bold text-3xl py-6">Create an account</Text>
+            <Text className="font-bold text-3xl py-6" style={{ fontFamily: "mont-semibold" }}>Create an account</Text>
 
             <View className="flex gap-1">
-              <Text className="font-medium">Enter full name</Text>
+              <Text className="font-medium" style={{ fontFamily: "mont-med" }}>Enter full name</Text>
               <TextInput
                 onChangeText={setFullName}
                 value={fullName}
@@ -84,7 +84,7 @@ const SignupScreen = () => {
             </View>
 
             <View className="flex gap-1">
-              <Text className="font-medium">Enter your email address</Text>
+              <Text className="font-medium" style={{ fontFamily: "mont-med" }}>Enter your email address</Text>
               <TextInput
                 onChangeText={setEmail}
                 value={email}
@@ -95,7 +95,7 @@ const SignupScreen = () => {
             </View>
 
             <View className="flex gap-1">
-              <Text className="font-medium">Enter date of birth</Text>
+              <Text className="font-medium" style={{ fontFamily: "mont-med" }}>Enter date of birth</Text>
               {showDatePicker && (
                 <DateTimePicker
                   mode="date"
@@ -166,7 +166,7 @@ const SignupScreen = () => {
             </View>
 
             <View className="flex items-center justify-between pl-2 flex-row">
-              <Text className="font-medium">Turn on location service</Text>
+              <Text className="font-medium" style={{ fontFamily: "mont-med" }}>Turn on location service</Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#767577" }}
                 thumbColor={location ? "#fd6ee9" : "#f4f3f4"}
@@ -182,7 +182,8 @@ const SignupScreen = () => {
 
             <Text
               onPress={() => navigate.navigate("SignIn")}
-              className="text-rose-800 font-medium text-center pt-3"
+              className="text-rose-600 font-medium text-center pt-3"
+              style={{ fontFamily: "mont-med" }}
             >
               Have an Account? Sign In
             </Text>

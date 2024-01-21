@@ -44,7 +44,7 @@ function LookingToFindScreen() {
     <SafeAreaView className="flex-1">
       <View className=" flex flex-col h-full justify-between bg-white ">
         <View className="p-4 mt-11">
-          <View className="flex w-[358px] h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
+          <View className="flex w-full h-1 bg-zinc-300 bg-opacity-25 rounded-md mb-9">
             <View className="w-[160px] h-1 bg-purple-500 rounded-md" />
           </View>
 
@@ -82,7 +82,7 @@ function LookingToFindScreen() {
                       <View style={styles.radiobg}></View>
                     ) : null}
                   </View>
-                  <Text className=" text-md text-left pb-[5%] ">
+                  <Text className=" text-md text-left pb-[5%] " style={{ fontFamily: "mont-med" }}>
                     A relationship
                   </Text>
                 </View>
@@ -101,7 +101,7 @@ function LookingToFindScreen() {
                       <View style={styles.radiobg}></View>
                     ) : null}
                   </View>
-                  <Text className=" text-md text-left pb-[5%]">
+                  <Text className=" text-md text-left pb-[5%]" style={{ fontFamily: "mont-med" }}>
                     Something casual
                   </Text>
                 </View>
@@ -120,7 +120,7 @@ function LookingToFindScreen() {
                       <View style={styles.radiobg}></View>
                     ) : null}
                   </View>
-                  <Text className=" text-md text-left pb-[5%]">Unsure</Text>
+                  <Text className=" text-md text-left pb-[5%]" style={{ fontFamily: "mont-med" }}>Unsure</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -137,7 +137,7 @@ function LookingToFindScreen() {
                       <View style={styles.radiobg}></View>
                     ) : null}
                   </View>
-                  <Text className=" text-md text-left pb-[5%]">
+                  <Text className=" text-md text-left pb-[5%]" style={{ fontFamily: "mont-med" }}>
                     Prefer not to say
                   </Text>
                 </View>

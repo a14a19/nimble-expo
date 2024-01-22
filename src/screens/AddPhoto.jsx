@@ -90,11 +90,11 @@ export default function AddPhoto() {
         console.log(selectedImage)
         const imageData = new FormData()
 
-        const imgJSON = {
-            avatar: selectedImage
-        }
+        // const imgJSON = {
+        //     avatar: selectedImage
+        // }
 
-        imageData.append("image", JSON.stringify(imgJSON))
+        imageData.append("profilePic", selectedImage)
 
         dispatch(userProfileUpdateAPI({
             body: imageData,

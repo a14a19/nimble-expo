@@ -53,7 +53,7 @@ export default function AddPhoto() {
         setImageURL(null);
         setCapturedURL(null);
         console.log("Click", permission)
-        if (!permission) {
+        if (permission && !permission.granted) {
             setShowCam(false);
             requestPermission();
         }
@@ -144,7 +144,7 @@ export default function AddPhoto() {
                                 <View className="w-12 h-12">
                                     <LinearGradient
                                         onTouchStart={toggleCameraType}
-                                        style={[{ padding: 10, width: 60, height: 60 }]}
+                                        style={[{ padding: 10, width: 60, height: 60, borderRadius: 60 }]}
                                         start={[0, 0]}
                                         end={[1, 1]}
                                         location={[0.5, 0.5]}
@@ -158,7 +158,7 @@ export default function AddPhoto() {
                                 <View className="w-12 h-12">
                                     <LinearGradient
                                         onTouchStart={handleCapture}
-                                        style={[{ padding: 10, width: 60, height: 60 }]}
+                                        style={[{ padding: 10, width: 60, height: 60, borderRadius: 60 }]}
                                         start={[0, 0]}
                                         end={[1, 1]}
                                         location={[0.5, 0.5]}
@@ -172,7 +172,7 @@ export default function AddPhoto() {
                                 <View className="flex items-center justify-center" >
                                     <LinearGradient
                                         onTouchStart={handleClose}
-                                        style={[{ padding: 4, width: 60, height: 60, display: "flex", alignItems: "center", justifyContent: "center" }]}
+                                        style={[{ padding: 4, width: 60, height: 60, borderRadius: 60, display: "flex", alignItems: "center", justifyContent: "center" }]}
                                         start={[0, 0]}
                                         end={[1, 1]}
                                         location={[0.5, 0.5]}
@@ -189,7 +189,7 @@ export default function AddPhoto() {
                             <View className="w-12 h-12 absolute bottom-5 right-24">
                                 <LinearGradient
                                     onTouchStart={handleClick}
-                                    style={[{ padding: 10, width: 60, height: 60 }]}
+                                    style={[{ padding: 10, width: 60, height: 60, borderRadius: 60 }]}
                                     start={[0, 0]}
                                     end={[1, 1]}
                                     location={[0.5, 0.5]}
@@ -203,7 +203,7 @@ export default function AddPhoto() {
                             <View className="w-12 h-12 absolute bottom-5 right-5">
                                 <LinearGradient
                                     onTouchStart={handleUpload}
-                                    style={[{ padding: 10, width: 60, height: 60 }]}
+                                    style={[{ padding: 10, width: 60, height: 60, borderRadius: 60 }]}
                                     start={[0, 0]}
                                     end={[1, 1]}
                                     location={[0.5, 0.5]}

@@ -3,12 +3,17 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import GradientButton from "../utils/GradientButton";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import CountdownTimer from "../components/CountdownTimer";
+import { userVerifyingOtpAPI } from "../features/auth/authSlice";
 
 export default function VerifyNumber() {
 
+    const dispatch = useDispatch()
+    const { name } = useSelector((store) => store.form)
     const navigation = useNavigation();
+    const prevScreen = navigation.getState()?.routes;
     const [otp, setOtp] = useState(0);
     const [triggerTimer, setTriggerTimer] = useState(false);
     const [inputs, setInputs] = useState({ input1: "", input2: "", input3: "", input4: "" })
@@ -63,10 +68,12 @@ export default function VerifyNumber() {
     }
 
     const handlePress = () => {
-        // console.log(`${inputs.input1}${inputs.input2}${inputs.input3}${inputs.input4}`, otp)
+        // console.log(`${inputs.input1}${inputs.input2}${inputs.input3}${inputs.input4}`, otp, prevScreen[prevScreen.length - 2])
         setErr({ state: false, message: "" })
         if (inputs.input1 && inputs.input2 && inputs.input3 && inputs.input4) {
             navigation.navigate("Passions")
+            dispatch(userVerifyingOtpAPI({ body: { otp: Number(`${inputs.input1}${inputs.input2}${inputs.input3}${inputs.input4}`), token: "", prevScreen: prevScreen[prevScreen.length - 2]?.name }, params: { id: "65aa8fb1f561b5078bde1fe0" }, options: "" }))
+
         } else {
             setErr({ state: true, message: "Please enter OTP" })
         }

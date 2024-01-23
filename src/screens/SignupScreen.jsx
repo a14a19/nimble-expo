@@ -91,8 +91,9 @@ const SignupScreen = ({ navigation }) => {
   // }
 
   const onRegisterPressed = async (data) => {
-    const { username, password, email } = data
     console.log(username, password, email)
+    const { username, password, email } = data
+    navigation.navigate("VerifyNumber")
   }
 
   return (

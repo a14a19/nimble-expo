@@ -42,3 +42,16 @@ export const userProfileUpdate = async (body, params, options) => {
   });
   return resp;
 }
+
+export const userVerifyingOTP = async (body, params, options) => {
+  const resp = await axios.request({
+    url: `${url}/users/verify-otp/${params.id}`,
+    method: "post",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+    data: body,
+  });
+  return resp;
+}

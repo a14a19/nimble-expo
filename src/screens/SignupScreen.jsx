@@ -18,9 +18,12 @@ import GradientButton from "../utils/GradientButton"
 import { useNavigation } from "@react-navigation/native"
 import HollowButton from "../utils/HollowButton"
 import CustomInput from "../components/CustomInput"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { AntDesign } from "@expo/vector-icons"
 import { CountryPicker, CountryButton } from "react-native-country-codes-picker"
+import { userSignUp } from "../services/api"
+import { useDispatch } from "react-redux"
+import { handleRegister } from "../features/auth/registerSlice"
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -52,47 +55,98 @@ const SignupScreen = ({ navigation }) => {
   const [showCountryCodePicker, setShowCountryCodePicker] = useState(false)
   const [countryCode, setCountryCode] = useState("+91")
 
-  // const [dateOfBirth, setDateOfBirth] = useState("")
-
   // const [location, setLocation] = useState(false)
 
-  // const [date, setDate] = useState(new Date())
+  // ---------- Date Of Birth Functionality -----------------
 
-  // const [showDatePicker, setShowDatePicker] = useState(false)
+  const [dateOfBirth, setDateOfBirth] = useState("")
 
-  // const onChange = ({ type }, selectedDate) => {
-  //   if (type == "set") {
-  //     const currentDate = selectedDate
-  //     setDate(currentDate)
-  //     if (Platform.OS === "android") {
-  //       toggleDatePicker()
-  //       setDateOfBirth(currentDate.toDateString())
-  //     }
-  //   } else {
-  //     toggleDatePicker()
-  //   }
-  // }
+  const [date, setDate] = useState(new Date())
+
+  const [showDatePicker, setShowDatePicker] = useState(false)
+
+  const [invalidAge, setInvalidAge] = useState(false)
+  const [invalidAgeError, setInvalidAgeError] = useState("")
+
+  const calculateAge = (dateOfBirth) => {
+    const currentDate = new Date()
+    const birthDate = new Date(dateOfBirth)
+
+    let age = currentDate.getFullYear() - birthDate.getFullYear()
+
+    if (
+      currentDate.getMonth() < birthDate.getMonth() ||
+      (currentDate.getMonth() === birthDate.getMonth() &&
+        currentDate.getDate() < birthDate.getDate())
+    ) {
+      age--
+    }
+
+    return age
+  }
+
+  const onChangeDate = ({ type }, selectedDate) => {
+    if (type == "set") {
+      const currentDate = selectedDate
+      setDate(currentDate)
+      const age = calculateAge(currentDate)
+      if (age < 18 || age > 40) setInvalidAge(true)
+      age < 18
+        ? setInvalidAgeError("Invalid Age : Too Young")
+        : age > 40
+        ? setInvalidAgeError("Invalid Age : Too Old")
+        : setInvalidAgeError("")
+      if (Platform.OS === "android") {
+        toggleDatePicker()
+        setDateOfBirth(currentDate.toISOString().split("T")[0])
+      }
+    } else {
+      toggleDatePicker()
+    }
+  }
 
   // const toggleSwitch = () => {
   //   setLocation(!location)
   // }
-  // const toggleDatePicker = () => {
-  //   setShowDatePicker(!showDatePicker)
-  // }
+  const toggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker)
+  }
 
-  // const confirmIOSDate = () => {
-  //   setDateOfBirth(date.toDateString())
-  //   toggleDatePicker()
-  // }
+  const confirmIOSDate = () => {
+    setDateOfBirth(date.toDateString())
+    toggleDatePicker()
+  }
 
-  // const onSubmit = () => {
-  //   console.log(fullName, email, dateOfBirth)
-  //   navigation.navigate("VerifyNumber")
-  // }
+  const dispatch = useDispatch()
+  // ----------------------------------------------------------
 
   const onRegisterPressed = async (data) => {
-    const { username, password, email } = data
-    console.log(username, password, email)
+    const { fullname, password, email, phone } = data
+
+    //  validate the DOB here
+
+    const formData = {
+      currentScreen: "SignUp",
+      fullName: fullname,
+      email: email,
+      number: phone,
+      dob: dateOfBirth,
+      password: password,
+    }
+
+    if (!invalidAge) {
+      console.log("registering user:")
+      const data = userSignUp(formData)
+      dispatch(
+        handleRegister({
+          _fullname: data.fullName,
+          _email: data.email,
+          _token: data.token,
+        })
+      )
+    }
+
+    // if (!invalidAge) console.log(fullname, email, password, dateOfBirth, phone)
   }
 
   return (
@@ -100,7 +154,7 @@ const SignupScreen = ({ navigation }) => {
       className="bg-white"
       style={{
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height,
+        // height: Dimensions.get("window").height,
       }}
     >
       <KeyboardAvoidingView>
@@ -112,13 +166,13 @@ const SignupScreen = ({ navigation }) => {
             >
               Create an account
             </Text>
-
+            {/* Full Name */}
             <View className="flex gap-1">
               <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
                 Enter full name
               </Text>
               <CustomInput
-                name="username"
+                name="fullname"
                 control={control}
                 placeholder="eg. John Reese"
                 rules={{
@@ -134,7 +188,7 @@ const SignupScreen = ({ navigation }) => {
                 }}
               />
             </View>
-
+            {/* Email Address */}
             <View className="flex gap-1">
               <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
                 Enter your email address
@@ -150,16 +204,85 @@ const SignupScreen = ({ navigation }) => {
                 }}
               />
             </View>
-
+            {/* Phone Number */}
             <View className="flex gap-1">
               <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
                 Enter your phone number
               </Text>
 
-              <View className="flex flex-row items-center justify-between">
+              <Controller
+                control={control}
+                name="phone"
+                rules={{
+                  required: "Phone number is required",
+                  pattern: {
+                    value: PHONE_REGEX,
+                    message: "Phone number is invalid",
+                  },
+                }}
+                render={({
+                  field: { value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <>
+                    <View className="flex flex-row items-center justify-between">
+                      <View className="flex flex-row justify-center w-14 px-1 h-10 bg-neutral-100 rounded-md border border-slate-300 text-black text-center">
+                        <TouchableOpacity
+                          onPress={() => setShowCountryCodePicker(true)}
+                          className="flex flex-row items-center justify-between w-full"
+                        >
+                          <Text>{countryCode}</Text>
+                          <AntDesign name="down" size={20} color="#BBBBD1" />
+                        </TouchableOpacity>
+                        <CountryPicker
+                          show={showCountryCodePicker}
+                          pickerButtonOnPress={(item) => {
+                            setCountryCode(item.dial_code)
+                            setShowCountryCodePicker(false)
+                          }}
+                          ListHeaderComponent={ListHeaderComponent}
+                          popularCountries={["in", "us"]}
+                          onBackdropPress={() =>
+                            setShowCountryCodePicker(false)
+                          }
+                          style={{
+                            modal: {
+                              height: 400,
+                            },
+                          }}
+                        />
+                      </View>
+                      <View className="w-4/5">
+                        <View className="w-full my-1">
+                          <TextInput
+                            value={value}
+                            onChangeText={onChange}
+                            onBlur={onBlur}
+                            placeholder="eg. 1234567890"
+                            autoComplete="off"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            keyboardType="numeric"
+                            className={`px-3 border border-slate-300 bg-neutral-100 rounded-md h-10 w-full ${
+                              error && "border-red-500"
+                            }`}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                    {error && (
+                      <Text style={{ color: "red", alignSelf: "stretch" }}>
+                        {error.message || "Error"}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+
+              {/* <View className="flex flex-row items-center justify-between">
                 <View className="flex flex-row justify-center w-14 px-1 h-10 bg-neutral-100 rounded-md border border-slate-300 text-black text-center">
                   <TouchableOpacity
-                    onPress={() => setShow(true)}
+                    onPress={() => setShowCountryCodePicker(true)}
                     className="flex flex-row items-center justify-between w-full"
                   >
                     <Text>{countryCode}</Text>
@@ -196,9 +319,72 @@ const SignupScreen = ({ navigation }) => {
                     }}
                   />
                 </View>
-              </View>
+              </View> */}
+            </View>
+            {/* Date of birth Picker */}
+            <View className="flex gap-1">
+              <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
+                Enter date of birth
+              </Text>
+              {showDatePicker && (
+                <DateTimePicker
+                  mode="date"
+                  display="spinner"
+                  value={date}
+                  onChange={onChangeDate}
+                  style={{
+                    height: 120,
+                    marginTop: -10,
+                  }}
+                  maximumDate={new Date()}
+                  minimumDate={new Date("1990-1-1")}
+                />
+              )}
+              {showDatePicker && Platform.OS === "ios" && (
+                <View className="flex justify-around flex-row">
+                  <TouchableOpacity onPress={toggleDatePicker} className="p-2">
+                    <HollowButton
+                      onPress={() => {
+                        // navigation.navigate("SignIn");
+                      }}
+                      label="Cancel"
+                      mTop={`0%`}
+                      pVertical={`0%`}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={confirmIOSDate} className="p-2">
+                    <GradientButton
+                      pVertical={`0%`}
+                      pVerticalBtn={`2%`}
+                      onPress={() => {
+                        // navigation.navigate("SignUp");
+                      }}
+                      label="Confirm"
+                      mTop={`0%`}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+              {!showDatePicker && (
+                <Pressable onPress={toggleDatePicker}>
+                  <TextInput
+                    value={dateOfBirth}
+                    placeholder="2000-10-10"
+                    onChangeText={setDateOfBirth}
+                    className={`px-3 border border-slate-300 bg-neutral-100 rounded-md h-10 w-full`}
+                    editable={false}
+                    onPress={toggleDatePicker}
+                  />
+                </Pressable>
+              )}
+              {invalidAge && (
+                <Text style={{ color: "red", alignSelf: "stretch" }}>
+                  {invalidAgeError}
+                </Text>
+              )}
             </View>
 
+            {/* Password */}
             <View className="flex gap-1">
               <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
                 Enter your Password
@@ -218,7 +404,7 @@ const SignupScreen = ({ navigation }) => {
                 }}
               />
             </View>
-
+            {/* Confirm password */}
             <View className="flex gap-1">
               <Text className="font-medium" style={{ fontFamily: "mont-med" }}>
                 Renter your Password

@@ -26,10 +26,13 @@ const CustomInput = ({
               onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
+              autoComplete="off"
+              autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry={secureTextEntry}
               keyboardType={keyboardType}
               className={`px-3 border border-slate-300 bg-neutral-100 rounded-md h-10 w-full ${
-                error && "border-red-400"
+                error && "border-red-500"
               }`}
             />
           </View>

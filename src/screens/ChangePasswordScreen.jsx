@@ -1,9 +1,38 @@
-import { TouchableWithoutFeedback, Pressable, Keyboard, TextInput,  SafeAreaView, Text, View } from "react-native";
+import { TouchableWithoutFeedback, Pressable, Keyboard, TextInput, SafeAreaView, Text, View } from "react-native";
 import GradientButton from "../utils/GradientButton"
 import { useNavigation } from "@react-navigation/native"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { passwordChangeAPI } from '../features/auth/authSlice';
+
+
 
 function ChangePasswordScreen() {
     const navigation = useNavigation();
+    const dispatch = useDispatch()
+    const { valid } = useSelector((store) => store.auth)
+    const [password, setPassword] = useState("");
+    const [cnfPassword, setCnfPassword] = useState("");
+    const [hasError, setError] = useState(false);
+    const [errormsg, setErrorMessage] = useState("");
+    
+    const handlePassword = (value) => {
+        setPassword(value);
+    };
+    const handleCnfPassword = (value) => {
+        setCnfPassword(value);
+    };
+    useEffect(()=> {
+        if(valid == true){
+            navigation.navigate("SignIn");
+        } else{
+            setError(false);
+            setErrorMessage(" message ");
+        }
+    },[valid]);
+    const handleSubmit = () => {
+        dispatch(passwordChangeAPI({ body: { password: password, cnfPassword: cnfPassword }, params: {id: "65a78a7ebe5805e5be7652ad"}, options: "" }))
+    };
 
     return (
         <TouchableWithoutFeedback
@@ -18,13 +47,15 @@ function ChangePasswordScreen() {
                         <TextInput
                             className="px-1 border mt-[%] border-slate-300 bg-neutral-100 h-[15%] rounded-lg w-auto "
                             placeholder=""
-                            
+                            onChangeText={handlePassword}
+
                         />
                         <Text className="py-[1%]" style={{ fontFamily: "mont-med" }}>Confirm Password</Text>
                         <TextInput
                             className="px-1 border mt-[%] border-slate-300 bg-neutral-100 h-[15%] rounded-lg w-auto "
                             placeholder=""
-                            
+                            onChangeText={handleCnfPassword}
+
                         />
                         <View>
                             <Pressable
@@ -39,9 +70,7 @@ function ChangePasswordScreen() {
                     <View>
                         <View className="mb-[3%]">
                             <GradientButton pVertical={`0%`}
-                                onPress={() => {
-                                    navigation.navigate("SignIn");
-                                }}
+                                onPress={handleSubmit}
 
                                 label="Continue"
                                 pVerticalBtn={`5%`}

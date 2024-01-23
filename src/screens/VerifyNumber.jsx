@@ -14,6 +14,7 @@ export default function VerifyNumber() {
     const { name } = useSelector((store) => store.form)
     const navigation = useNavigation();
     const prevScreen = navigation.getState()?.routes;
+    const prev = prevScreen[prevScreen.length - 2]?.name;
     const [otp, setOtp] = useState(0);
     const [triggerTimer, setTriggerTimer] = useState(false);
     const [inputs, setInputs] = useState({ input1: "", input2: "", input3: "", input4: "" })
@@ -78,6 +79,17 @@ export default function VerifyNumber() {
             setErr({ state: true, message: "Please enter OTP" })
         }
     }
+    const handlePressTwo = () => {
+        // console.log(`${inputs.input1}${inputs.input2}${inputs.input3}${inputs.input4}`, otp, prevScreen[prevScreen.length - 2])
+        setErr({ state: false, message: "" })
+        if (inputs.input1 && inputs.input2 && inputs.input3 && inputs.input4) {
+            navigation.navigate("ChangePassword")
+            dispatch(userVerifyingOtpAPI({ body: { otp: Number(`${inputs.input1}${inputs.input2}${inputs.input3}${inputs.input4}`), token: "", prevScreen: prevScreen[prevScreen.length - 2]?.name }, params: { id: "65aa8fb1f561b5078bde1fe0" }, options: "" }))
+
+        } else {
+            setErr({ state: true, message: "Please enter OTP" })
+        }
+    }
 
     const handleResend = () => {
         // console.log("Resend otp here!")
@@ -90,8 +102,10 @@ export default function VerifyNumber() {
                 <View className="flex flex-col h-full justify-between" >
                     <View>
                         <AntDesign name="left" size={24} color="black" onPress={() => navigation.navigate("Verification")} style={{ paddingTop: 10, paddingLeft: 10 }} />
-                        <Text className="flex text-left text-3xl pl-[4%] pb-[3%] mt-5" style={{ fontFamily: "mont-semibold" }}>Enter your Number</Text>
-                        <Text className="flex text-left px-[4%] text-base" style={{ fontFamily: "mont-med" }}>Enter the 4 digits code we’ve texted to +1234567890</Text>
+                        <Text className="flex text-left text-3xl pl-[4%] pb-[3%] mt-5" style={{ fontFamily: "mont-semibold" }}>
+                            {prev === "Verification" ? "Verify your Email" : "Verify your Account"}
+                        </Text>
+                        <Text className="flex text-left px-[4%] text-base" style={{ fontFamily: "mont-med" }}>Enter the 4 digits code that we’ve sent to your given email.</Text>
                     </View>
 
                     <View className="flex flex-row w-1/2 justify-between mx-auto">
@@ -104,10 +118,16 @@ export default function VerifyNumber() {
                     {/* Empty view  */}
                     <View></View>
 
-                    <View className="mb-8">
-                        {inputs.input1 && inputs.input2 && inputs.input3 && inputs.input4 && <GradientButton pVertical={`0%`} onPress={() => handlePress()} label={`Continue`} pVerticalBtn={`4%`} mTop={`5%`} />}
-                        <CountdownTimer startDuration={60} handleClick={handleResend} triggerTimer={triggerTimer} />
-                    </View>
+                    {prev === "Verification" ?
+                        <View className="mb-8">
+                            {inputs.input1 && inputs.input2 && inputs.input3 && inputs.input4 && <GradientButton pVertical={`0%`} onPress={() => handlePressTwo()} label={`Continue`} pVerticalBtn={`4%`} mTop={`5%`} />}
+                            <CountdownTimer startDuration={60} handleClick={handleResend} triggerTimer={triggerTimer} />
+                        </View> :
+                        <View className="mb-8">
+                            {inputs.input1 && inputs.input2 && inputs.input3 && inputs.input4 && <GradientButton pVertical={`0%`} onPress={() => handlePress()} label={`Continue`} pVerticalBtn={`4%`} mTop={`5%`} />}
+                            <CountdownTimer startDuration={60} handleClick={handleResend} triggerTimer={triggerTimer} />
+                        </View>
+                    }
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

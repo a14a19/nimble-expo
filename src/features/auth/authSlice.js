@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { userSignIn } from "../../services/api";
+import { userSignIn, userVerifyingOTP, passwordChange } from "../../services/api";
 import axios from "axios";
 
 const url = process.env.EXPO_PUBLIC_API_URL;
@@ -10,6 +10,7 @@ const initialState = {
   userData: {},
   token: "",
   errors: [],
+  valid: false,
 };
 
 export const userSignInApi = createAsyncThunk(
@@ -18,6 +19,37 @@ export const userSignInApi = createAsyncThunk(
     try {
       console.log("AXIOS", payload);
       return userSignIn(payload.body, payload.params, payload.options)
+        .then((res) => res.data)
+        .catch((e) => e.response.data);
+    } catch (e) {
+      console.log(e);
+      thunkAPI.rejectWithValue("Error - ", e);
+      return e;
+    }
+  }
+);
+
+export const passwordChangeAPI = createAsyncThunk(
+  "auth/update-password",
+  async (payload, thunkAPI) => {
+    try {
+      console.log("AXIOS", payload);
+      return passwordChange(payload.body, payload.params, payload.options)
+        .then((res) => res.data)
+        .catch((e) => e.response.data);
+    } catch (e) {
+      console.log(e);
+      thunkAPI.rejectWithValue("Error - ", e);
+      return e;
+    }
+  }
+);
+
+export const userVerifyingOtpAPI = createAsyncThunk(
+  "auth/userVerifyingOTP",
+  async (payload, thunkAPI) => {
+    try {
+      return userVerifyingOTP(payload.body, payload.params, payload.options)
         .then((res) => res.data)
         .catch((e) => e.response.data);
     } catch (e) {
@@ -56,6 +88,25 @@ const authSlice = createSlice({
       console.log("Rejected", payload);
     });
     builder.addCase(userSignInApi.pending, (state, { payload }) => {
+      console.log("Pending", payload);
+    });
+    builder.addCase(userVerifyingOtpAPI.fulfilled, (state, { payload }) => {
+      console.log("Fulfilled", payload);
+    });
+    builder.addCase(userVerifyingOtpAPI.rejected, (state, { payload }) => {
+      console.log("Rejected", payload);
+    });
+    builder.addCase(userVerifyingOtpAPI.pending, (state, { payload }) => {
+      console.log("Pending", payload);
+    });
+    builder.addCase(passwordChangeAPI.fulfilled, (state, { payload }) => {
+      console.log("Fullfilled", payload);
+      state.valid = payload.status;
+    });
+    builder.addCase(passwordChangeAPI.rejected, (state, { payload }) => {
+      console.log("Rejected", payload);
+    });
+    builder.addCase(passwordChangeAPI.pending, (state, { payload }) => {
       console.log("Pending", payload);
     });
   },

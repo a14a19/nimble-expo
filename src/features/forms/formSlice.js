@@ -5,6 +5,8 @@ import { userFinalSignUp, userProfileUpdate } from "../../services/api";
 const initialState = {
   name: "",
 
+  isAPIPending: false,
+
   //Receivables (selected button entries) from 'Form' components.
 
   //PassionsComponent Arrays
@@ -145,7 +147,7 @@ export const userFinalSignUpAPI = createAsyncThunk(
 
 export const userProfileUpdateAPI = createAsyncThunk("form/userProfileUpdate", async (payload, thunkAPI) => {
   try {
-    return userProfileUpdate(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response.data);
+    return userProfileUpdate(payload.body, payload.params, payload.options).then((res) => res.data).catch((e) => e.response);
   } catch (e) {
     thunkAPI.rejectWithValue("form error - ", e)
     return e
@@ -225,12 +227,15 @@ const formSlice = createSlice({
       console.log("user form updated rejected", payload)
     })
     builder.addCase(userProfileUpdateAPI.fulfilled, (state, { payload }) => {
+      state.isAPIPending = false;
       console.log("user form updated fulfilled", payload)
     })
     builder.addCase(userProfileUpdateAPI.pending, (state, { payload }) => {
+      state.isAPIPending = true;
       console.log("user form updated pending", payload)
     })
     builder.addCase(userProfileUpdateAPI.rejected, (state, { payload }) => {
+      state.isAPIPending = false;
       console.log("user form updated rejected", payload)
     })
   }

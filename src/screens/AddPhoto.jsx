@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View, ActivityIndicator, Modal } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { AntDesign, MaterialCommunityIcons, FontAwesome, Ionicons, } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
@@ -13,7 +13,7 @@ import { userProfileUpdateAPI } from "../features/forms/formSlice";
 export default function AddPhoto() {
 
     const dispatch = useDispatch();
-    const { passionsCategories, FoodAndDrink, Entertainment } = useSelector((store) => store.form);
+    const { passionsCategories, FoodAndDrink, Entertainment, isAPIPending } = useSelector((store) => store.form);
 
     const camera = useRef(null);
     const navigation = useNavigation();
@@ -90,11 +90,11 @@ export default function AddPhoto() {
         console.log(selectedImage)
         const imageData = new FormData()
 
-        const imgJSON = {
-            avatar: selectedImage
-        }
+        // const imgJSON = {
+        //     avatar: selectedImage
+        // }
 
-        imageData.append("image", JSON.stringify(imgJSON))
+        imageData.append("profilePic", selectedImage)
 
         dispatch(userProfileUpdateAPI({
             body: imageData,
@@ -105,6 +105,13 @@ export default function AddPhoto() {
 
     return (
         <SafeAreaView>
+            {isAPIPending &&
+                <Modal transparent={true} visible={true}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#00000050" }}>
+                        <ActivityIndicator size="large" color="#F21464" />
+                    </View>
+                </Modal>
+            }
             <ScrollView className="bg-white">
                 <View className="flex flex-col h-full justify-between bg-white gap-y-5">
                     <View className="p-4 mt-11">

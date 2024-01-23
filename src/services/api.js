@@ -41,12 +41,12 @@ export const userFinalSignUp = async (body, params, options) => {
     url: `${url}/users/update/${params.id}`,
     method: "put",
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
     withCredentials: true,
     data: body,
-  })
-  return resp
+  });
+  return resp;
 }
 
 export const userProfileUpdate = async (body, params, options) => {
@@ -54,10 +54,37 @@ export const userProfileUpdate = async (body, params, options) => {
     url: `${url}/users/update-profile-pic/${params.id}`,
     method: "put",
     headers: {
-      "Content-Type": "multipart/form-data",
+      // 'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
     withCredentials: true,
     data: body,
-  })
-  return resp
+  });
+  return resp;
+}
+
+export const passwordChange = async (body, params, options) => {
+  const resp = await axios.request({
+    url: `${url}/users/update-password/${params.id}`,
+    method: "put",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+    data: body,
+  });
+  return resp;
+}
+
+export const userVerifyingOTP = async (body, params, options) => {
+  const resp = await axios.request({
+    url: `${url}/users/verify-otp/${params.id}`,
+    method: "post",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+    data: body,
+  });
+  return resp;
 }

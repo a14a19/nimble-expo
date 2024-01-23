@@ -77,7 +77,7 @@ function SignInScreen() {
                         <View>
                             <Pressable
                                 onPress={() => {
-                                    navigation.navigate("ForgotPassword");
+                                    navigation.navigate("Verification");
                                 }}
                             >
                                 <Text className="flex text-right mt-4 mr-4 text-sm text-[#F21464] " style={{ fontFamily: "mont-med" }}>Forgot Password?</Text>

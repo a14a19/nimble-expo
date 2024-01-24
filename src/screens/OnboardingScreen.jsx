@@ -36,7 +36,7 @@ function OnboardingScreen() {
                             pVertical={`0%`}
                             pVerticalBtn={`4%`}
                             onPress={() => {
-
+                                console.log("test")
                                 navigation.navigate("SignUp");
                             }}
                             label="Create Account"

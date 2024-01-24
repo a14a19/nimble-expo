@@ -367,7 +367,7 @@ const SignupScreen = ({ navigation }) => {
               )}
               {!showDatePicker && (
                 <Pressable onPress={toggleDatePicker}>
-                  <TextInput
+                  <Text
                     value={dateOfBirth}
                     placeholder="2000-10-10"
                     onChangeText={setDateOfBirth}

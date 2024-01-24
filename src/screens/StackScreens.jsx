@@ -1,20 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "./HomeScreen";
-import LoginScreen from "./LoginScreen";
 import SignInScreen from "./SignInScreen";
 import VerificationScreen from "./VerificationScreen";
 import VerifyNumber from "./VerifyNumber";
 import SignupScreen from "./SignupScreen";
 import OnboardingScreen from "./OnboardingScreen";
-import PassionsScreen from "./PassionsScreen";
-import TraitsScreen from "./TraitsScreen";
-import PreferencesScreen from "./PreferencesScreen";
-import LookingToFindScreen from "./LookingToFindScreen";
-import SexualOrientationScreen from "./SexualOrientationScreen";
+import PassionsScreen from "./preferencesScreens/PassionsScreen";
+import TraitsScreen from "./preferencesScreens/TraitsScreen";
+import PreferencesScreen from "./preferencesScreens/PreferencesScreen";
+import LookingToFindScreen from "./preferencesScreens/LookingToFindScreen";
+import SexualOrientationScreen from "./preferencesScreens/SexualOrientationScreen";
 import ChangePasswordScreen from "./ChangePasswordScreen";
-import AddPhoto from "./AddPhoto";
+import AddPhoto from "./preferencesScreens/AddPhoto";
 
 
 export default function StackScreens() {
@@ -23,16 +21,6 @@ export default function StackScreens() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name="Before"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        /> */}
-        {/* <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          /> */}
         <Stack.Screen
           name="OnboardingScreen"
           component={OnboardingScreen}

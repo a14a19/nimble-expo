@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
-import GradientButton from "../utils/GradientButton"
+import GradientButton from "../../utils/GradientButton"
 
 function PreferencesScreen() {
     const navigation = useNavigation();

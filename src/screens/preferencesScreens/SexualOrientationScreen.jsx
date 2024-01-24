@@ -11,15 +11,15 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-import Asexual from "../assets/imgs/Asexual.png";
-import Pansexual from "../assets/imgs/Pansexual.png";
-import Bisexual from "../assets/imgs/Bisexual.png";
-import Gay from "../assets/imgs/Gay.png";
-import GradientButton from "../utils/GradientButton";
+import Asexual from "../../assets/imgs/Asexual.png";
+import Pansexual from "../../assets/imgs/Pansexual.png";
+import Bisexual from "../../assets/imgs/Bisexual.png";
+import Gay from "../../assets/imgs/Gay.png";
+import GradientButton from "../../utils/GradientButton";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedPreferences } from "../features/forms/formSlice";
+import { setSelectedPreferences } from "../../features/forms/formSlice";
 
 function SexualOrientationScreen() {
   const dispatch = useDispatch();

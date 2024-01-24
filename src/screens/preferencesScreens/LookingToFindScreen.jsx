@@ -9,14 +9,14 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-import GradientButton from "../utils/GradientButton";
+import GradientButton from "../../utils/GradientButton";
 import { useNavigation } from "@react-navigation/native";
 import { useMemo, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedPreferences } from "../features/forms/formSlice";
+import { setSelectedPreferences } from "../../features/forms/formSlice";
 
 function LookingToFindScreen() {
   const dispatch = useDispatch();

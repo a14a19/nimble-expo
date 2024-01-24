@@ -1,4 +1,4 @@
-import TraitsComponent from "../components/TraitsComponent";
+import TraitsComponent from "../../components/TraitsComponent";
 
 const TraitsScreen = () => {
   return <TraitsComponent />;

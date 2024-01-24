@@ -7,8 +7,8 @@ import { Camera, CameraType } from 'expo-camera';
 import { LinearGradient } from "expo-linear-gradient";
 import { useSelector, useDispatch } from "react-redux";
 
-import GradientButton from "../utils/GradientButton";
-import { userProfileUpdateAPI } from "../features/forms/formSlice";
+import GradientButton from "../../utils/GradientButton";
+import { userProfileUpdateAPI } from "../../features/forms/formSlice";
 
 export default function AddPhoto() {
 

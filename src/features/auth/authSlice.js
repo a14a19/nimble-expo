@@ -11,6 +11,7 @@ const initialState = {
   token: "",
   errors: [],
   valid: false,
+  isAPIPending: false,
 };
 
 export const userSignInApi = createAsyncThunk(
@@ -102,12 +103,16 @@ const authSlice = createSlice({
     builder.addCase(passwordChangeAPI.fulfilled, (state, { payload }) => {
       console.log("Fullfilled", payload);
       state.valid = payload.status;
+      state.isAPIPending = false;
     });
     builder.addCase(passwordChangeAPI.rejected, (state, { payload }) => {
       console.log("Rejected", payload);
+      state.isAPIPending = false;
+
     });
     builder.addCase(passwordChangeAPI.pending, (state, { payload }) => {
       console.log("Pending", payload);
+      state.isAPIPending = true;
     });
   },
 });

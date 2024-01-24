@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, Pressable, Keyboard, TextInput, SafeAreaView, Text, View } from "react-native";
+import { TouchableWithoutFeedback, Pressable, Keyboard, TextInput, SafeAreaView, Text, View, ActivityIndicator, Modal } from "react-native";
 import GradientButton from "../utils/GradientButton"
 import { useNavigation } from "@react-navigation/native"
 import { useEffect, useState } from "react"
@@ -15,23 +15,25 @@ function ChangePasswordScreen() {
     const [cnfPassword, setCnfPassword] = useState("");
     const [hasError, setError] = useState(false);
     const [errormsg, setErrorMessage] = useState("");
-    
+    const { isAPIPending } = useSelector((store) => store.auth);
+
+
     const handlePassword = (value) => {
         setPassword(value);
     };
     const handleCnfPassword = (value) => {
         setCnfPassword(value);
     };
-    useEffect(()=> {
-        if(valid == true){
+    useEffect(() => {
+        if (valid == true) {
             navigation.navigate("SignIn");
-        } else{
+        } else {
             setError(false);
             setErrorMessage(" message ");
         }
-    },[valid]);
+    }, [valid]);
     const handleSubmit = () => {
-        dispatch(passwordChangeAPI({ body: { password: password, cnfPassword: cnfPassword }, params: {id: "65a78a7ebe5805e5be7652ad"}, options: "" }))
+        dispatch(passwordChangeAPI({ body: { password: password, cnfPassword: cnfPassword }, params: { id: "65a78a7ebe5805e5be7652ad" }, options: "" }))
     };
 
     return (
@@ -39,7 +41,15 @@ function ChangePasswordScreen() {
             onPress={Keyboard.dismiss}
             accessible={false}
         >
+
             <SafeAreaView>
+                {isAPIPending &&
+                    <Modal transparent={true} visible={true}>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#00000050" }}>
+                            <ActivityIndicator size="large" color="#F21464" />
+                        </View>
+                    </Modal>
+                }
                 <View className="flex flex-col h-full justify-between pt-[8%] px-[4%] bg-white">
                     <View>
                         <Text className="flex text-left font-bold text-3xl pb-[6%]" style={{ fontFamily: "mont-semibold" }}>Change Password</Text>
@@ -47,6 +57,7 @@ function ChangePasswordScreen() {
                         <TextInput
                             className="px-1 border mt-[%] border-slate-300 bg-neutral-100 h-[15%] rounded-lg w-auto "
                             placeholder=""
+                            secureTextEntry={true}
                             onChangeText={handlePassword}
 
                         />
@@ -54,6 +65,7 @@ function ChangePasswordScreen() {
                         <TextInput
                             className="px-1 border mt-[%] border-slate-300 bg-neutral-100 h-[15%] rounded-lg w-auto "
                             placeholder=""
+                            secureTextEntry={true}
                             onChangeText={handleCnfPassword}
 
                         />

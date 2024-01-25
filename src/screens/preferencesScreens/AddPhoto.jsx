@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View, ActivityIndicator, Modal } from "react-native"
+import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { AntDesign, MaterialCommunityIcons, FontAwesome, Ionicons, } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
@@ -8,12 +8,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useSelector, useDispatch } from "react-redux";
 
 import GradientButton from "../../utils/GradientButton";
-import { userProfileUpdateAPI } from "../../features/forms/formSlice";
+import { userProfileUpdateAPI } from "../../features/auth/authSlice";
 
 export default function AddPhoto() {
 
     const dispatch = useDispatch();
-    const { passionsCategories, FoodAndDrink, Entertainment, isAPIPending } = useSelector((store) => store.form);
+    const { passionsCategories, FoodAndDrink, Entertainment } = useSelector((store) => store.form);
+    const { isAPIPending, userData } = useSelector((store) => store.auth);
 
     const camera = useRef(null);
     const navigation = useNavigation();
@@ -98,20 +99,13 @@ export default function AddPhoto() {
 
         dispatch(userProfileUpdateAPI({
             body: imageData,
-            params: { id: "65aa8fb1f561b5078bde1fe0" },
+            params: { id: "65afca9516257d6a7ec63b59" },
             options: {}
         }))
     }
 
     return (
         <SafeAreaView>
-            {isAPIPending &&
-                <Modal transparent={true} visible={true}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#00000050" }}>
-                        <ActivityIndicator size="large" color="#F21464" />
-                    </View>
-                </Modal>
-            }
             <ScrollView className="bg-white">
                 <View className="flex flex-col h-full justify-between bg-white gap-y-5">
                     <View className="p-4 mt-11">

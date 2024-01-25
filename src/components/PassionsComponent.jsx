@@ -79,6 +79,7 @@ const PassionsComponent = () => {
         setSelectedInterests({ category, interests: selectedInterests })
       );
     });
+    navigateTo.navigate("Traits")
   };
 
   const toggleInterest = useCallback(
@@ -215,11 +216,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.FoodAndDrink[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    } `}
+                    className={`text-center mr-1.5 ${passionsCategories.FoodAndDrink[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      } `}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -246,11 +246,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Entertainment[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Entertainment[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -277,11 +276,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Sports[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Sports[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -310,11 +308,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.TravellingAndActivities[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.TravellingAndActivities[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -356,11 +353,10 @@ const PassionsComponent = () => {
                 >
                   <Text className="text-2xl ml-1.5">{emoji}</Text>
                   <Text
-                    className={`text-center mr-1.5 ${
-                      passionsCategories.Pets[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${passionsCategories.Pets[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -373,7 +369,7 @@ const PassionsComponent = () => {
             {allCategoriesSelected ? (
               <GradientButton
                 pVertical={`1%`}
-                onPress={() => navigateTo.navigate("Traits")}
+                onPress={() => handleSubmit()}
                 label={`Continue`}
                 pVerticalBtn={`4%`}
                 mTop={`10%`}
@@ -396,16 +392,10 @@ const PassionsComponent = () => {
             )}
           </View>
 
-          <GradientButton
-            pVertical={`1%`}
-            onPress={() => handleSubmit()}
-            label={`Submit All Categories`}
-            pVerticalBtn={`4%`}
-            mTop={`30%`}
-          />
+
 
           {/* Final Submit demo */}
-          <GradientButton
+          {/* <GradientButton
             pVertical={`1%`}
             onPress={() =>
               dispatch(
@@ -425,7 +415,7 @@ const PassionsComponent = () => {
             label={`Final Submit`}
             pVerticalBtn={`4%`}
             mTop={`30%`}
-          />
+          /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

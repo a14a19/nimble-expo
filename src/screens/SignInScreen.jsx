@@ -34,18 +34,31 @@ function SignInScreen() {
 
     }
     const checkErrors = () => {
-        dispatch(userSignInApi({ body: { email: email, password: password }, params: "", options: "" }))
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailRegex.test(email)) {
+        //     setEmailError(true);
+        //     setEmailErrorMessage("Please enter a valid email address.");
+        //     return;
+        // } else if (errors.length > 0) {
+        //     setError(true);
+        //     setErrorMsg(errors[0].msg);
+        // }
+        // else {
+        //     setError(false);
+        // }
         if (!emailRegex.test(email)) {
             setEmailError(true);
             setEmailErrorMessage("Please enter a valid email address.");
             return;
-        } else if (errors.length > 0) {
-            setError(true);
-            setErrorMsg(errors[0].msg);
-        }
-        else {
+        } else {
             setError(false);
+            dispatch(userSignInApi({ body: { email: email, password: password }, params: "", options: "" }))
+            if (errors.length > 0) {
+                setError(true);
+                setErrorMsg(errors[0].msg);
+            } else {
+                setError(false);
+            }
         }
     }
 

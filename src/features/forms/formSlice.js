@@ -127,7 +127,9 @@ const initialState = {
       Aquarius: false,
       Pisces: false,
     },
+    
   },
+  
 };
 
 export const userFinalSignUpAPI = createAsyncThunk(

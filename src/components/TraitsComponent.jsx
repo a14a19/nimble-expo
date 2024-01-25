@@ -115,12 +115,13 @@ const TraitsComponent = () => {
         traitsCategories[category]
       );
 
-      console.log(selectedInterests);
+      console.log(category, selectedInterests);
 
       dispatch(
         setSelectedInterests({ category, interests: selectedInterests })
       );
     });
+    navigateTo.navigate("LookingToFind")
   };
 
   const personalityTraitsSelected =
@@ -200,11 +201,10 @@ const TraitsComponent = () => {
                   }`}
                 >
                   <Text
-                    className={`text-center mr-1.5 ${
-                      traitsCategories.Personality[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    } `}
+                    className={`text-center mr-1.5 ${traitsCategories.Personality[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      } `}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -219,7 +219,7 @@ const TraitsComponent = () => {
             className="text-xl mb-4"
             style={{ fontFamily: "mont-semibold" }}
           >
-            Astrology Sign
+            Astrology Sign <Text className="text-base">(optional)</Text>
           </Text>
           <View className="flex flex-row flex-wrap items-center mb-4 ml-2">
             {AstrologySignData.map(
@@ -230,11 +230,10 @@ const TraitsComponent = () => {
                   className={`rounded-2xl border border-slate-200 flex gap-x-2 flex-row items-center justify-center mb-2 mr-4 p-1 ${backgroundColor}`}
                 >
                   <Text
-                    className={`text-center mr-1.5 ${
-                      traitsCategories.AstrologySign[interest]
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
+                    className={`text-center mr-1.5 ${traitsCategories.AstrologySign[interest]
+                      ? "text-white"
+                      : "text-gray-500"
+                      }`}
                     style={{ fontFamily: "mont-med" }}
                   >
                     {formattedInterest}
@@ -244,14 +243,11 @@ const TraitsComponent = () => {
             )}
           </View>
         </View>
-        <View>
-          <Text className="text-center ">
-            WILL WORK ON THE NEXT PART CONTINUE DOES NOT WORK!
-          </Text>
+        <View className="mb-5">
           {personalityTraitsSelected ? (
             <GradientButton
               pVertical={`1%`}
-              onPress={() => navigateTo.navigate("LookingToFind")}
+              onPress={() => handleSubmit()}
               label={`Continue`}
               pVerticalBtn={`4%`}
               mTop={`10%`}

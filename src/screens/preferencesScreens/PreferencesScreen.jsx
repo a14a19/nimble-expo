@@ -1,21 +1,50 @@
 import { View, SafeAreaView, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
 
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 import GradientButton from "../../utils/GradientButton"
+import { userFinalSignUpAPI } from "../../features/auth/authSlice";
+import { setSelectedPreferences } from "../../features/forms/formSlice";
 
 function PreferencesScreen() {
+
+    const dispatch = useDispatch()
+    const { FoodAndDrink, Entertainment, Sports, TravellingAndActivities, Pets, Personality, AstrologySign, LookingToFind, Gender, SexualOrientation, GenderCriteria, age, distance } = useSelector((store) => store.form)
+    const { userData } = useSelector((store) => store.auth)
     const navigation = useNavigation();
 
-    const [ageSlider, setAgeSlider] = useState([18, 30])
-    const [distSlider, setDistSlider] = useState([50])
+    useEffect(() => {
+        console.log("user data after preferences - ", userData);
+        if (userData.age) {
+            navigation.navigate("AddPhoto")
+        }
+    }, [userData])
+
+    const [ageSlider, setAgeSlider] = useState(age)
+    const [distSlider, setDistSlider] = useState(distance)
 
     const handleSubmit = () => {
-        console.log("age", ageSlider, "dist", distSlider)
-        navigation.navigate("AddPhoto");
+        const data = {
+            FoodAndDrink: FoodAndDrink,
+            Entertainment: Entertainment,
+            Sports: Sports,
+            TravellingAndActivities: TravellingAndActivities,
+            Pets: Pets,
+            Personality: Personality,
+            AstrologySign: AstrologySign,
+            toFind: LookingToFind,
+            Gender: Gender,
+            SexualOrientation: SexualOrientation,
+            toBeShown: GenderCriteria,
+            age: ageSlider,
+            distance: distSlider[0]
+        }
+        console.log("final data to send: ", data)
+        dispatch(userFinalSignUpAPI({ body: data, params: { id: "65afca9516257d6a7ec63b59" }, options: "" }))
     }
 
     return (

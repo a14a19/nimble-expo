@@ -124,7 +124,9 @@ const initialState = {
       Aquarius: false,
       Pisces: false,
     },
+    
   },
+  
 };
 
 const formSlice = createSlice({
